@@ -1,0 +1,30 @@
+.bg-darkest {
+    background-color: var(--color-darkest);
+    color: var(--color-lighter);
+}
+.bg-darker  {
+    background-color: var(--color-darker);
+    color: var(--color-lighter);
+}
+.bg-dark    {
+    background-color: var(--color-dark);
+    color: var(--color-lighter);
+}
+.bg-mid     {
+    background-color: var(--color-mid);
+    color: var(--color-lighter);
+}
+.bg-light   {
+    background-color: var(--color-light);
+    color: var(--color-darkest);
+}
+.bg-lighter {
+    background-color: var(--color-lighter);
+    color: var(--color-darkest);
+}
+
+.color-light {color: var(--color-light);}
+
+.text-light {font-weight: var(--font-weight-light);}
+.text-thin {font-weight: var(--font-weight-thin);}
+

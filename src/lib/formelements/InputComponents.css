@@ -1,0 +1,8 @@
+.contextmenu {
+    --context-group-padding: 0 0.5rem;
+    --margin-input-container-bottom: 0.5rem;
+}
+
+.input-container {
+    margin-bottom: var(--margin-input-container-bottom);
+}

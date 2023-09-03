@@ -1,0 +1,12 @@
+* {
+    font-family: var(--font-family);
+}
+
+html {
+    font-size: 16px;
+}
+h1, h2, h3, h4, h5, h6, p, label {
+    color: var(--color-lighter);
+    font-size: var(--font-size-16);
+    font-weight: var(--font-weight-light);
+}
