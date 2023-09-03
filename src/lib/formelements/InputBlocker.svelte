@@ -1,12 +1,22 @@
 <script lang="ts">
 
+    import ErrorMessage from "./ErrorMessage.svelte";
+
     export let block: boolean = false;
+
+    let showError: boolean = false;
+    let errorMessage: string = "";
 
     $: blockClass = block ? "block" : "";
 
+    function handleClick() {
+        errorMessage = "This field is disabled";
+        showError = true;
+    }
 </script>
 
-<div class="input-blocker bg-darker {blockClass}"></div>
+<div class="input-blocker bg-darker {blockClass}" on:click={handleClick}></div>
+<ErrorMessage bind:show="{showError}" text="{errorMessage}" />
 
 <style>
     .input-blocker {
