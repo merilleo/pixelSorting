@@ -1,6 +1,6 @@
 <script lang="ts">
     import { afterUpdate } from 'svelte';
-    import InputBlocker from "./InputBlocker.svelte";
+    import InputBlocker from "./utils/InputBlocker.svelte";
     import {
         isFloat,
         isInteger,
@@ -8,7 +8,8 @@
         stringToConstrainedFloat,
         stringToConstrainedInt
     } from "../../ts/MathUtils";
-    import ErrorMessage from "./ErrorMessage.svelte";
+    import ErrorMessage from "./utils/ErrorMessage.svelte";
+    import ProgressBar from "./utils/ProgressBar.svelte";
 
     type NumberTypes = "integer"|"float";
 
@@ -21,7 +22,7 @@
     export let hasConstraints = true;
     export let disabled: boolean = false;
     export let showError = false;
-
+    /* TODO implement last valid number and if invalid reset to that number */
 
     let value: number = start;
     let dragging: boolean = false;
@@ -45,7 +46,7 @@
             const currentStep = dragging ? stepDrag : step;
             if (hasConstraints && value + currentStep > max ) {
                 value = max;
-                fireErrorMessage(`${max} is the maximum`);
+                fireErrorMessage(`${max} ${unit} is the maximum`);
             } else {
                 value += currentStep;
             }
@@ -57,7 +58,7 @@
             const currentStep = dragging ? stepDrag : step;
             if (hasConstraints && value - currentStep < min) {
                 value = min;
-                fireErrorMessage(`${min} is the minimum`);
+                fireErrorMessage(`${min} ${unit} is the minimum`);
             } else {
                 value -= currentStep;
             }
@@ -128,7 +129,7 @@
     function getNumberFromInput(value, hasConstraints, min, max, numberType:NumberTypes):number {
         if (hasConstraints) {
             if (isOutsideConstraints(value, min, max)) {
-                fireErrorMessage(`Number must be between ${min} - ${max}`);
+                fireErrorMessage(`Number must be between ${min} - ${max} ${unit}`);
             }
             return numberType === "float"
                 ? stringToConstrainedFloat(value, min, max)
@@ -164,7 +165,11 @@
             <div class="number-display bg-darkest text-thin" on:mousedown={handleMouseDown}>
                 <span>{displayNumber} {unit}</span>
             </div>
+            {#if hasConstraints}
+                <ProgressBar progress="{value / max}"/>
+            {/if}
         {/if}
+
     </form>
 
     {#if !edit}

@@ -39,6 +39,7 @@
                 <InputNumber disabled="{true}"/>
                 <InputNumber />
                 <InputNumber type="integer" unit="px" hasConstraints="{false}"/>
+                <InputNumber unit="m" start="{750}" min="{100}" max="{1000}" step="{10}" />
             </ContextMenuGroupBody>
         </ContextMenuGroup>
     </ContextMenu>
