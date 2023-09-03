@@ -111,7 +111,7 @@
 
         if (!isStringValidNumber(inputValue, type)) {
             value = defaultValue;
-            fireErrorMessage(`${inputValue} is not a ${type}`);
+            fireErrorMessage(`${inputValue} is not a number`);
         } else {
             value = getNumberFromInput(inputValue, hasConstraints, min, max, type);
         }
@@ -128,7 +128,7 @@
     function getNumberFromInput(value, hasConstraints, min, max, numberType:NumberTypes):number {
         if (hasConstraints) {
             if (isOutsideConstraints(value, min, max)) {
-                fireErrorMessage(`${type} must be between ${min} - ${max}`);
+                fireErrorMessage(`Number must be between ${min} - ${max}`);
             }
             return numberType === "float"
                 ? stringToConstrainedFloat(value, min, max)
