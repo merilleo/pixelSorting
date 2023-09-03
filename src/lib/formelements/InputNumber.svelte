@@ -240,10 +240,5 @@
     .input-number:hover form {
         background-color: var(--color-darker);
     }
-    .number-display:focus-visible {
-        /* TODO reinstate if clickable text is implemented
-        cursor: text;
-         */
-    }
 
 </style>
