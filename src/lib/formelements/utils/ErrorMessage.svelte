@@ -12,7 +12,7 @@
 
     afterUpdate(() => {
         if (show) {
-            setTimeout(()=>{show = false;}, 1250)
+            setTimeout(()=>{show = false;}, 800)
         }
     });
 
