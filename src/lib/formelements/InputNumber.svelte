@@ -22,7 +22,6 @@
     export let hasConstraints = true;
     export let disabled: boolean = false;
     export let showError = false;
-    /* TODO implement last valid number and if invalid reset to that number */
 
     let value: number = start;
     let dragging: boolean = false;
@@ -106,12 +105,11 @@
         inputElement.blur();
     }
 
-    function handleBlur(event, defaultValue) {
+    function handleBlur(event,) {
         event.preventDefault();
         const inputValue = event.target.value;
 
         if (!isStringValidNumber(inputValue, type)) {
-            value = defaultValue;
             fireErrorMessage(`${inputValue} is not a number`);
         } else {
             value = getNumberFromInput(inputValue, hasConstraints, min, max, type);
@@ -158,7 +156,7 @@
         {#if edit }
             <input type="text"
                    class="number-input bg-darkest text-thin"
-                   on:blur={event => handleBlur(event, start)}
+                   on:blur={handleBlur}
                    bind:this={inputElement}
                    value="{displayNumber}"/>
         {:else }
