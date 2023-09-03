@@ -152,26 +152,27 @@
         <button class="number-modifier subtractor bg-darkest color-light" on:click={decrement}>&lt;</button>
     {/if}
 
-    <form class="number-input-form" on:submit="{handleFormSubmission}">
+    <form class="number-input-form bg-darkest " on:submit="{handleFormSubmission}">
         {#if edit }
             <input type="text"
-                   class="number-input bg-darkest text-thin"
+                   class="number-input text-thin color-light"
                    on:blur={handleBlur}
                    bind:this={inputElement}
                    value="{displayNumber}"/>
         {:else }
-            <div class="number-display bg-darkest text-thin" on:mousedown={handleMouseDown}>
-                <span>{displayNumber} {unit}</span>
-            </div>
             {#if hasConstraints}
                 <ProgressBar progress="{value / max}"/>
             {/if}
+            <div class="number-display text-thin" on:mousedown={handleMouseDown}>
+                <span>{displayNumber} {unit}</span>
+            </div>
+
         {/if}
 
     </form>
 
     {#if !edit}
-        <button class="number-modifier adder bg-darkest color-light" on:click={increment}>&gt;</button>
+        <button class="number-modifier adder bg-darkest" on:click={increment}>&gt;</button>
     {/if}
 
     <InputBlocker block="{disabled}" />
@@ -180,7 +181,6 @@
 
 
 <style>
-
     .input-number {
         --input-height: 1.5rem;
         position: relative;
@@ -192,6 +192,7 @@
 
     .number-modifier {
         display: none;
+        z-index: 2;
         width: var(--input-height);
         height: 100%;
     }
@@ -225,15 +226,18 @@
     }
 
     .number-display {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         height: 100%;
         text-align: center;
         cursor: e-resize;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+
     }
-    .input-number:hover .number-display {
+    .input-number:hover form {
         background-color: var(--color-darker);
     }
     .number-display:focus-visible {
