@@ -14,6 +14,7 @@
     import ContextMenuGroupBody from "./lib/contextmenu/ContextMenuGroupBody.svelte";
     import InputNumber from "./lib/formelements/InputNumber.svelte";
     import InputGroup from "./lib/formelements/InputGroup.svelte";
+    import Checkbox from "./lib/formelements/Checkbox.svelte";
 
 </script>
 
@@ -40,10 +41,12 @@
                 <InputGroup label="Test">
                     <InputNumber disabled="{true}"/>
                     <InputNumber type="integer" unit="px" hasConstraints="{false}"/>
-                    <InputNumber />
+                    <InputNumber unit="m" start="{0}" min="{-100}" max="{100}" step="{10}" />
                 </InputGroup>
-                <InputGroup label="">
-                    <InputNumber unit="m" start="{750}" min="{100}" max="{1000}" step="{10}" />
+                <InputGroup label="Checkbox">
+                    <Checkbox label="test"/>
+                    <Checkbox />
+                    <Checkbox />
                 </InputGroup>
             </ContextMenuGroupBody>
         </ContextMenuGroup>

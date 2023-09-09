@@ -183,7 +183,6 @@
 
 <style>
     .input-number {
-        --input-height: 1.5rem;
         position: relative;
         display: flex;
         justify-content: stretch;
