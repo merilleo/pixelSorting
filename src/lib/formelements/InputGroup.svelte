@@ -6,7 +6,7 @@
 
 <Seperator />
 <div class="input-group">
-    <p class="input-group-label text-thin">{label}</p>
+    <p class="input-group-label color-light">{label}</p>
     <div class="input-group-inputs">
         <slot></slot>
     </div>
