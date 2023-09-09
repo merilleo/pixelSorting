@@ -13,6 +13,7 @@
     import ContextMenuGroupHeader from "./lib/contextmenu/ContextMenuGroupHeader.svelte";
     import ContextMenuGroupBody from "./lib/contextmenu/ContextMenuGroupBody.svelte";
     import InputNumber from "./lib/formelements/InputNumber.svelte";
+    import InputGroup from "./lib/formelements/InputGroup.svelte";
 
 </script>
 
@@ -36,10 +37,14 @@
 
             </ContextMenuGroupHeader>
             <ContextMenuGroupBody>
-                <InputNumber disabled="{true}"/>
-                <InputNumber />
-                <InputNumber type="integer" unit="px" hasConstraints="{false}"/>
-                <InputNumber unit="m" start="{750}" min="{100}" max="{1000}" step="{10}" />
+                <InputGroup label="Test">
+                    <InputNumber disabled="{true}"/>
+                    <InputNumber type="integer" unit="px" hasConstraints="{false}"/>
+                    <InputNumber />
+                </InputGroup>
+                <InputGroup label="">
+                    <InputNumber unit="m" start="{750}" min="{100}" max="{1000}" step="{10}" />
+                </InputGroup>
             </ContextMenuGroupBody>
         </ContextMenuGroup>
     </ContextMenu>

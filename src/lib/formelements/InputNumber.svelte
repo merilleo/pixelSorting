@@ -14,16 +14,16 @@
     type NumberTypes = "integer"|"float";
 
     export let type: NumberTypes = "float";
+    export let start: number = 50;
+    export let value: number = start;
     export let min: number = 0;
     export let max: number = 100;
-    export let start: number = 50;
     export let step: number = 5;
     export let unit: string = "";
     export let hasConstraints = true;
     export let disabled: boolean = false;
-    export let showError = false;
 
-    let value: number = start;
+    export let showError = false;
     let dragging: boolean = false;
     let edit: boolean = false;
     let errorMessageText:string = "";
@@ -32,6 +32,7 @@
     let stepDrag: number = step * 0.5;
 
     $: displayNumber =  value.toFixed(type === "float" ? 2 : 0);
+    $: disabledClass = disabled ? "disabled" : "";
 
     afterUpdate(() => {
         if (edit) {
@@ -147,7 +148,7 @@
 </script>
 
 
-<div class="input-container input-number">
+<div class="input-container input-number {disabledClass}">
     {#if !edit }
         <button class="number-modifier subtractor bg-darkest color-light" on:click={decrement}>&lt;</button>
     {/if}
@@ -196,8 +197,12 @@
         width: var(--input-height);
         height: 100%;
     }
+
     .input-number:hover .number-modifier {
         display: block;
+    }
+    .input-number.disabled:hover .number-modifier {
+        display: none;
     }
 
     .number-modifier:hover {
