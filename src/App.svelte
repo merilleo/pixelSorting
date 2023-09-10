@@ -16,6 +16,9 @@
     import InputGroup from "./lib/formelements/InputGroup.svelte";
     import Checkbox from "./lib/formelements/Checkbox.svelte";
 
+
+    let checkboxValue = false;
+    let open = true;
 </script>
 
 <main class="bg-darkest">
@@ -34,19 +37,22 @@
 
         </ContextMenuHeader>
         <ContextMenuGroup>
-            <ContextMenuGroupHeader>
-
-            </ContextMenuGroupHeader>
-            <ContextMenuGroupBody>
-                <InputGroup label="Test">
-                    <InputNumber disabled="{true}"/>
-                    <InputNumber type="integer" unit="px" hasConstraints="{false}"/>
-                    <InputNumber unit="m" start="{0}" min="{-100}" max="{100}" step="{10}" />
+            <ContextMenuGroupHeader
+                    label="Header One"
+                    hasCheckbox="{true}"
+                    bind:enabled={checkboxValue}
+                    bind:isOpen={open}
+            />
+            <ContextMenuGroupBody bind:isOpen={open} >
+                <InputGroup label="Input Number">
+                    <InputNumber disabled="{!checkboxValue}"/>
+                    <InputNumber type="integer" unit="px" hasConstraints="{false}" disabled="{!checkboxValue}"/>
+                    <InputNumber unit="m" start="{0}" min="{-100}" max="{100}" step="{10}" disabled="{!checkboxValue}"/>
                 </InputGroup>
-                <InputGroup label="Checkbox">
-                    <Checkbox label="test"/>
-                    <Checkbox />
-                    <Checkbox />
+                <InputGroup label="Checkbox" disabled="{!checkboxValue}">
+                    <Checkbox label="teste" disabled="{!checkboxValue}"/>
+                    <Checkbox label="tester" disabled="{!checkboxValue}" />
+                    <Checkbox label="testerino" disabled="{!checkboxValue}"/>
                 </InputGroup>
             </ContextMenuGroupBody>
         </ContextMenuGroup>

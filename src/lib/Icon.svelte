@@ -25,8 +25,7 @@
         height: var(--width);
     }
     .icon svg {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
+        width: var(--width);
+        height: var(--width);
     }
 </style>

@@ -1,11 +1,14 @@
 <script lang="ts">
+    import { slide } from 'svelte/transition';
 
+    export let isOpen: boolean = true;
 </script>
 
-<div class="contextmenu-group-body">
-    <slot></slot>
-</div>
-
+{#if isOpen}
+    <div class="contextmenu-group-body" transition:slide>
+        <slot></slot>
+    </div>
+{/if}
 <style>
 
     .contextmenu-group-body {

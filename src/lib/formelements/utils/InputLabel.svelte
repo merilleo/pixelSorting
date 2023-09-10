@@ -4,7 +4,7 @@
     $: highlightClass = highlighted ? "" : "color-light"
 </script>
 
-<p class="input-label text-thin text-14 {highlightClass}">{label}</p>
+<label class="input-label text-thin text-14 {highlightClass}">{label}</label>
 
 <style>
     .input-label {

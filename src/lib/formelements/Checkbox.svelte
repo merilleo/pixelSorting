@@ -1,8 +1,11 @@
 <script lang="ts">
     import { Check } from "svelte-bootstrap-icons";
     import InputLabel from "./utils/InputLabel.svelte";
+    import InputBlocker from "./utils/InputBlocker.svelte";
+    import Icon from "../Icon.svelte";
 
     export let checked: boolean = false;
+    export let disabled: boolean = false;
     export let label: string = "";
 
     $: checkedClass = checked ? "checked" : "";
@@ -13,18 +16,20 @@
 <div class="checkbox-container input-container">
     <div class="checkbox bg-darkest  {checkedClass}" on:click={handleClick}>
         {#if checked }
-            <Check style="width: var(--input-height); height: var(--input-height);"/>
+            <Icon icon="check" size="{1.5}"/>
         {/if}
     </div>
     {#if label}
-        <InputLabel highlighted="{checked}" label="Check 1"/>
+        <InputLabel highlighted="{checked}" label="{label}"/>
     {/if}
-</div>
 
+    <InputBlocker block="{disabled}" />
+</div>
 <style>
     .checkbox-container {
         display: flex;
         align-items: center;
+        position: relative;
     }
     .checkbox {
         width: var(--input-height);
