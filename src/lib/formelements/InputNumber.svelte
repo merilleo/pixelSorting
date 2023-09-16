@@ -145,6 +145,12 @@
         showError = true;
     }
 
+    function handleKeyUpEnter(event) {
+        event.preventDefault();
+        if (event.key === "Enter") {
+            edit = true;
+        }
+    }
 </script>
 
 
@@ -164,7 +170,9 @@
             {#if hasConstraints}
                 <ProgressBar progress="{value / max}"/>
             {/if}
-            <div class="number-display text-thin" on:mousedown={handleMouseDown}>
+            <div class="number-display text-thin"
+                 on:mousedown={handleMouseDown}
+                 role="button" tabindex="0" on:keyup={handleKeyUpEnter}>
                 <span>{displayNumber} {unit}</span>
             </div>
 

@@ -11,10 +11,17 @@
     $: checkedClass = checked ? "checked" : "";
 
     function handleClick() {checked = !checked}
+    function handleKeyUpEnter(event) {
+        if (event.key === "Enter") {
+            checked = !checked
+        }
+    }
 
 </script>
 <div class="checkbox-container input-container">
-    <div class="checkbox bg-darkest  {checkedClass}" on:click={handleClick}>
+    <div class="checkbox bg-darkest  {checkedClass}"
+         on:click={handleClick}
+         role="checkbox" aria-checked="{checked}" tabindex="0" on:keyup={handleKeyUpEnter}>
         {#if checked }
             <Icon icon="check" size="{1.5}"/>
         {/if}
