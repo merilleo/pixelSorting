@@ -145,10 +145,15 @@
         showError = true;
     }
 
-    function handleKeyUpEnter(event) {
+    function handleKeyDownEnter(event) {
+        if (event.keyCode == 9) return; //Tab
         event.preventDefault();
         if (event.key === "Enter") {
             edit = true;
+        } else if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
+            decrement();
+        } else if (event.key === "ArrowRight" || event.key === "ArrowUp") {
+            increment();
         }
     }
 </script>
@@ -172,7 +177,7 @@
             {/if}
             <div class="number-display text-thin"
                  on:mousedown={handleMouseDown}
-                 role="button" tabindex="0" on:keyup={handleKeyUpEnter}>
+                 role="button" tabindex="0" on:keydown={handleKeyDownEnter}>
                 <span>{displayNumber} {unit}</span>
             </div>
 
