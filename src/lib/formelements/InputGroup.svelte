@@ -1,7 +1,7 @@
 <script lang="ts">
     import Seperator from "./utils/Seperator.svelte";
 
-    export let label:string = "";
+    export let label: string = "";
 </script>
 
 <Seperator />

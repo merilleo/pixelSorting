@@ -15,21 +15,22 @@
     import InputNumber from "./lib/formelements/InputNumber.svelte";
     import InputGroup from "./lib/formelements/InputGroup.svelte";
     import Checkbox from "./lib/formelements/Checkbox.svelte";
+    import ToggleSwitch from "./lib/formelements/ToggleSwitch.svelte";
 
 
-    let checkboxValue = false;
+    let checkboxValue = true;
     let open = true;
 </script>
 
 <main class="bg-darkest">
     <Toolbar>
         <ToolbarGroup>
-            <ToolBarTool active="{false}" />
-            <ToolBarTool active="{false}" />
+            <ToolBarTool />
+            <ToolBarTool />
         </ToolbarGroup>
         <ToolbarGroup>
-            <ToolBarTool active="{false}" />
-            <ToolBarTool active="{false}" />
+            <ToolBarTool />
+            <ToolBarTool />
         </ToolbarGroup>
     </Toolbar>
     <ContextMenu>
@@ -49,10 +50,14 @@
                     <InputNumber type="integer" unit="px" hasConstraints="{false}" disabled="{!checkboxValue}"/>
                     <InputNumber unit="m" start="{0}" min="{-100}" max="{100}" step="{10}" disabled="{!checkboxValue}"/>
                 </InputGroup>
-                <InputGroup label="Checkbox" disabled="{!checkboxValue}">
+                <InputGroup label="Checkbox">
                     <Checkbox label="teste" disabled="{!checkboxValue}"/>
                     <Checkbox label="tester" disabled="{!checkboxValue}" />
                     <Checkbox label="testerino" disabled="{!checkboxValue}"/>
+                </InputGroup>
+                <InputGroup label="Checkbox">
+                    <ToggleSwitch disabled="{!checkboxValue}"/>
+                    <ToggleSwitch labelOff="Disabled" labelOn="Enabled" disabled="{!checkboxValue}"/>
                 </InputGroup>
             </ContextMenuGroupBody>
         </ContextMenuGroup>
