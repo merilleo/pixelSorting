@@ -1,3 +1,15 @@
+<script context="module" lang="ts">
+
+    export interface ContextMenuGroupHeaderProps {
+        label: string;
+        enabled:boolean;
+        isOpen:boolean;
+        hasCheckbox?:boolean;
+        hasPresets?:boolean;
+    }
+
+</script>
+
 <script lang="ts">
 
     import Checkbox from "../formelements/Checkbox.svelte";

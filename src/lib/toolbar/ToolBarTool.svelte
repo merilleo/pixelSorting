@@ -1,9 +1,9 @@
 <script lang="ts">
     export let active:boolean = false;
-    export let onClick;
+    export let onClick = ()=>{active = !active};
 </script>
 
-<div class="toolbar-tool {active? 'active' : ''}" on:click={()=>{active = !active}}>
+<div class="toolbar-tool {active? 'active' : ''}" on:click={onClick}>
     <slot></slot>
 </div>
 

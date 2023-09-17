@@ -3,7 +3,7 @@
 </script>
 
 <div class="toolbar bg-mid">
-
+    <slot></slot>
 </div>
 
 <style>

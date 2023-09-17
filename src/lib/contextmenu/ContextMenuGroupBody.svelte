@@ -1,3 +1,14 @@
+<script context="module" lang="ts">
+
+    import type {InputGroupProps} from "../formelements/InputGroup.svelte";
+
+    export interface ContextMenuGroupBodyProps {
+        isOpen: boolean;
+        groups: InputGroupProps[];
+    }
+
+</script>
+
 <script lang="ts">
     import { slide } from 'svelte/transition';
 

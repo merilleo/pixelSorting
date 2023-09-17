@@ -5,8 +5,6 @@
 
     type IconKeys = keyof typeof iconJsonFile;
     type Icons =  IconKeys;
-
-
     export let icon: Icons;
     export let size: number = 1.125;
 

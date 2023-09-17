@@ -1,3 +1,18 @@
+<script context="module" lang="ts">
+    import type {InputNumberPropsClass} from "./InputNumber.svelte";
+    import type {CheckboxPropsClass} from "./Checkbox.svelte";
+    import type {ToggleSwitchPropsClass} from "./ToggleSwitch.svelte";
+
+    export type InputOption = InputNumberPropsClass | CheckboxPropsClass | ToggleSwitchPropsClass;
+
+    export interface InputGroupProps {
+        label?: string;
+        inputs: InputOption[];
+    }
+
+</script>
+
+
 <script lang="ts">
     import Seperator from "./utils/Seperator.svelte";
 

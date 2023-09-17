@@ -1,9 +1,4 @@
 <script lang="ts">
-    import CreateCanvasForm from "./lib/CreateCanvasForm.svelte";
-    import {canvasContainerId, sketch, stage} from "./store.js";
-    import SelectImage from "./lib/SelectImage.svelte";
-    import StageSelectImage from "./lib/StageSelectImage.svelte";
-    import StageSelectSorting from "./lib/StageSelectSorting.svelte";
     import Toolbar from "./lib/toolbar/Toolbar.svelte";
     import ToolbarGroup from "./lib/toolbar/ToolbarGroup.svelte";
     import ToolBarTool from "./lib/toolbar/ToolBarTool.svelte";
@@ -16,16 +11,18 @@
     import InputGroup from "./lib/formelements/InputGroup.svelte";
     import Checkbox from "./lib/formelements/Checkbox.svelte";
     import ToggleSwitch from "./lib/formelements/ToggleSwitch.svelte";
+    import Icon from "./lib/Icon.svelte";
+    import ContextMenuBuilder from "./lib/contextmenu/ContextMenuBuilder.svelte";
+
+    import type {ContextMenuProps} from "./lib/contextmenu/ContextMenu.svelte";
 
 
-    let checkboxValue = true;
-    let open = true;
 </script>
 
 <main class="bg-darkest">
     <Toolbar>
         <ToolbarGroup>
-            <ToolBarTool />
+            <ToolBarTool> <Icon icon="filter-left" /></ToolBarTool>
             <ToolBarTool />
         </ToolbarGroup>
         <ToolbarGroup>
@@ -34,9 +31,12 @@
         </ToolbarGroup>
     </Toolbar>
     <ContextMenu>
-        <ContextMenuHeader>
+        <ContextMenuBuilder />
+    </ContextMenu>
 
-        </ContextMenuHeader>
+
+    <!--
+    <ContextMenu>
         <ContextMenuGroup>
             <ContextMenuGroupHeader
                     label="Header One"
@@ -62,7 +62,7 @@
             </ContextMenuGroupBody>
         </ContextMenuGroup>
     </ContextMenu>
-
+    -->
 </main>
 
 <style>

@@ -1,3 +1,41 @@
+<script context="module" lang="ts">
+    import type {InputGroupProps} from "./InputGroup.svelte";
+    import type {InputPropsInterface} from "./ts/TS_InputPropsInterface.svelte";
+
+    export type NumberTypes = "integer"|"float";
+
+    export type InputNumberBindProps = {
+        value: number;
+        disabled: boolean;
+    }
+
+    export type InputNumberOptionalProps = {
+        type?: NumberTypes;
+        start?: number;
+        min?: number;
+        max?: number;
+        step?: number;
+        unit?: string;
+        hasConstraints?: boolean;
+        showError?: boolean;
+    }
+    export class InputNumberPropsClass implements InputPropsInterface<InputNumberBindProps, InputNumberOptionalProps> {
+        bindProps: InputNumberBindProps;
+        optionalProps: InputNumberOptionalProps;
+
+        constructor(bindProps: InputNumberBindProps, optionalProps?: InputNumberOptionalProps) {
+            this.bindProps = bindProps;
+
+            if (typeof optionalProps !== 'undefined') {
+                this.optionalProps = optionalProps;
+            } else {
+                this.optionalProps = {};
+            }
+        }
+    }
+
+</script>
+
 <script lang="ts">
     import { afterUpdate } from 'svelte';
     import InputBlocker from "./utils/InputBlocker.svelte";
@@ -11,7 +49,6 @@
     import ErrorMessage from "./utils/ErrorMessage.svelte";
     import ProgressBar from "./utils/ProgressBar.svelte";
 
-    type NumberTypes = "integer"|"float";
 
     export let type: NumberTypes = "float";
     export let start: number = 50;

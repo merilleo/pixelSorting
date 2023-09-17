@@ -1,9 +1,39 @@
+<script context="module" lang="ts">
+
+    import type {InputPropsInterface} from "./ts/TS_InputPropsInterface.svelte";
+
+    export type ToggleSwitchPropsBindProps = {
+        checked: boolean;
+        disabled: boolean;
+    }
+
+    export type ToggleSwitchPropsOptionalProps = {
+        hasLabel?: boolean;
+        labelOff?: string;
+        labelOn?: string;
+    }
+
+
+    export class ToggleSwitchPropsClass implements InputPropsInterface<ToggleSwitchPropsBindProps, ToggleSwitchPropsOptionalProps> {
+        bindProps: ToggleSwitchPropsBindProps;
+        optionalProps: ToggleSwitchPropsOptionalProps;
+
+        constructor(bindProps: ToggleSwitchPropsBindProps, optionalProps?: ToggleSwitchPropsOptionalProps) {
+            this.bindProps = bindProps;
+
+            if (typeof optionalProps !== 'undefined') {
+                this.optionalProps = optionalProps;
+            } else {
+                this.optionalProps = {};
+            }
+        }
+    }
+
+</script>
+
 <script lang="ts">
-    import { Check } from "svelte-bootstrap-icons";
     import InputLabel from "./utils/InputLabel.svelte";
     import InputBlocker from "./utils/InputBlocker.svelte";
-    import Icon from "../Icon.svelte";
-    import ProgressBar from "./utils/ProgressBar.svelte";
 
     export let checked: boolean = false;
     export let disabled: boolean = false;

@@ -1,3 +1,13 @@
+<script context="module" lang="ts">
+
+    import type {ContextMenuGroupProps} from "./ContextMenuGroup.svelte";
+
+    export interface ContextMenuProps {
+        groups: ContextMenuGroupProps[];
+    }
+
+</script>
+
 <script lang="ts">
     import Resizer from "./Resizer.svelte";
 

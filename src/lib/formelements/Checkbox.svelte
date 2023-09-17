@@ -1,3 +1,35 @@
+<script context="module" lang="ts">
+
+
+    import type {InputPropsInterface} from "./ts/TS_InputPropsInterface.svelte";
+
+    export type CheckboxPropsBindProps = {
+        checked: boolean;
+        disabled: boolean;
+    }
+
+    export type CheckboxPropsOptionalProps = {
+        label?: string;
+    }
+
+
+    export class CheckboxPropsClass implements InputPropsInterface<CheckboxPropsBindProps, CheckboxPropsOptionalProps> {
+        bindProps: CheckboxPropsBindProps;
+        optionalProps: CheckboxPropsOptionalProps;
+
+        constructor(bindProps: CheckboxPropsBindProps, optionalProps?: CheckboxPropsOptionalProps) {
+            this.bindProps = bindProps;
+
+            if (typeof optionalProps !== 'undefined') {
+                this.optionalProps = optionalProps;
+            } else {
+                this.optionalProps = {};
+            }
+        }
+    }
+
+</script>
+
 <script lang="ts">
     import { Check } from "svelte-bootstrap-icons";
     import InputLabel from "./utils/InputLabel.svelte";
