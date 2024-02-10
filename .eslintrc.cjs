@@ -83,6 +83,8 @@ module.exports = {
         }
       }
     ],
+    // Disable the enforcement of no explicit type any
+    '@typescript-eslint/no-explicit-any': 'off',
     // Enforces the usage of language tags in Svelte blocks.
     'svelte/block-lang': [
       'error',
@@ -92,17 +94,17 @@ module.exports = {
       }
     ],
     // Enforce naming convention TypeScript and Svelte files.
-    "check-file/filename-naming-convention": [
-      "error",
+    'check-file/filename-naming-convention': [
+      'error',
       {
-        "**/*.{ts,svelte}": "PASCAL_CASE",
+        '**/*.{ts,svelte}': 'PASCAL_CASE',
       }
     ],
     // Enforce naming convention for all directories inside the `src` directory.
-    "check-file/folder-naming-convention": [
-      "error",
+    'check-file/folder-naming-convention': [
+      'error',
       {
-        "src/**/": "KEBAB_CASE",
+        'src/**/': 'KEBAB_CASE',
       }
     ],
         // Enforces the use of === and !== over == and !=.
