@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.json"
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "lint": "eslint --ext .js,.svelte src"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^2.4.2",
@@ -15,6 +16,8 @@
     "@typescript-eslint/eslint-plugin": "^6.4.0",
     "@typescript-eslint/parser": "^6.4.0",
     "eslint": "^8.47.0",
+    "eslint-plugin-check-file": "^2.6.2",
+    "eslint-plugin-svelte": "^2.35.1",
     "svelte": "^4.0.5",
     "svelte-check": "^3.4.6",
     "tslib": "^2.6.0",
@@ -24,6 +27,7 @@
   "dependencies": {
     "@types/p5": "^1.6.2",
     "p5": "^1.7.0",
-    "svelte-bootstrap-icons": "^3.0.0"
+    "svelte-bootstrap-icons": "^3.0.0",
+    "svelte-preprocess": "^5.1.3"
   }
 }
