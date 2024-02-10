@@ -69,16 +69,18 @@ module.exports = {
     ],
     // Prevents the use of a variable before it was defined.
     '@typescript-eslint/no-use-before-define': ['error'],
-    // Provides a warning for inconsistent use of delimiters in member expressions.
+    // Enforces the usage of semicolons.
+    '@typescript-eslint/semi': ['error', 'always'],
+    // Enforces consistent use of semicolons as delimiters in both multi-line and single-line member expressions.
     '@typescript-eslint/member-delimiter-style': [
-      'warn',
+      'error',
       {
         'multiline': {
-          'delimiter': 'comma',
-          'requireLast': false
+          'delimiter': 'semi',
+          'requireLast': true
         },
         'singleline': {
-          'delimiter': 'comma',
+          'delimiter': 'semi',
           'requireLast': false
         }
       }
@@ -120,8 +122,6 @@ module.exports = {
         'ignoreRestSiblings': false
       }
     ],
-    // Enforces the usage of semicolons.
-    'semi': ['error','always'],
     // Enforces the usage of single quotes.
     'quotes': [
       'error',
