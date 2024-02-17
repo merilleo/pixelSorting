@@ -1,7 +1,7 @@
 <script lang="ts">
     import type {BooleanStoreType, ConfigType} from "../../TypeLibrary";
     import {createCheckboxConfigs} from "../form-elements/Checkbox.svelte";
-    import {createBooleanStoreObject} from "../../stores/BooleanStoreObject";
+    import {createBooleanStore} from "../../stores/BooleanStoreObject";
     import type {NumberStoreType} from "../../stores/NumberStoreObject";
 
     export let object: BooleanStoreType | NumberStoreType;

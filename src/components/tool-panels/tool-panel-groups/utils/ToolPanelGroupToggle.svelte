@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
     import type {BooleanStoreType} from "../../../../TypeLibrary";
-    import {createBooleanStoreObject} from "../../../../stores/BooleanStoreObject";
+    import {createBooleanStore} from "../../../../stores/BooleanStoreObject";
 
     export type ToolPanelGroupToogleConfig = {
         open: BooleanStoreType;
@@ -8,7 +8,7 @@
 
     export function createToolPanelGroupToogleConfig(): ToolPanelGroupToogleConfig {
         return {
-            open: createBooleanStoreObject(),
+            open: createBooleanStore(),
         };
     }
 
@@ -19,13 +19,13 @@
     import {onMount} from "svelte";
     import {Icon} from "../../../../ComponentLibrary";
 
-    export const openStore: BooleanStoreType = createBooleanStoreObject();
+    export const openStore: BooleanStoreType = createBooleanStore();
     let open: boolean = true;
 
     openStore.subscribe(value => open = value);
 
     /*export const config: ToolPanelGroupToogleConfig = {
-        open: createBooleanStoreObject(),
+        open: createBooleanStore(),
     };
 
     onMount(() => {

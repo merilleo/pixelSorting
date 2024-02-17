@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-    import {type BooleanStoreType, createBooleanStoreObject} from "../../stores/BooleanStoreObject";
+    import {type BooleanStoreType, createBooleanStore} from "../../stores/BooleanStoreObject";
 
     export type SwitchConfigs = {
         checked: BooleanStoreType;
@@ -11,8 +11,8 @@
 
     export function createSwitchConfigs(labelOff?:string, labelOn?:string ): SwitchConfigs {
         return {
-            checked: createBooleanStoreObject(),
-            disabled: createBooleanStoreObject(),
+            checked: createBooleanStore(),
+            disabled: createBooleanStore(),
             componentName: "switch",
             labelOff: (labelOff !== undefined) ? labelOff : "",
             labelOn: (labelOn !== undefined) ? labelOn : "",

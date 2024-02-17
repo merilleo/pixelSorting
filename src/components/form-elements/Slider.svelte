@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
-    import {type BooleanStoreType, createBooleanStoreObject} from "../../stores/BooleanStoreObject";
-    import {createNumberStoreObject, type NumberStoreType} from "../../stores/NumberStoreObject";
+    import {type BooleanStoreType, createBooleanStore} from "../../stores/BooleanStoreObject";
+    import {createNumberStore, type NumberStoreType} from "../../stores/NumberStoreObject";
 
     export type NumberTypes = "integer"|"float";
 
@@ -28,8 +28,8 @@
     ): SliderConfigs {
         return {
             mode: mode,
-            number: createNumberStoreObject(start),
-            disabled: createBooleanStoreObject(),
+            number: createNumberStore(start),
+            disabled: createBooleanStore(),
             componentName: "slider",
             start: start,
             min: min,

@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-    import {createBooleanStoreObject, type BooleanStoreType} from "../../stores/BooleanStoreObject";
+    import {createBooleanStore, type BooleanStoreType} from "../../stores/BooleanStoreObject";
 
     export type CheckboxConfigs = {
         /**
@@ -33,8 +33,8 @@
      */
     export function createCheckboxConfigs(label:string): CheckboxConfigs {
         return {
-            checked: createBooleanStoreObject(),
-            disabled: createBooleanStoreObject(),
+            checked: createBooleanStore(),
+            disabled: createBooleanStore(),
             label: label,
             componentName: "checkbox"
         };

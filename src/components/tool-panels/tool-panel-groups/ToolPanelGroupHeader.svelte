@@ -16,14 +16,14 @@
     import Checkbox, {createCheckboxConfigs} from "../../form-elements/Checkbox.svelte";
     import Icon from "../../generals/Icon.svelte";
     import ToolPanelGroupToggle from "./utils/ToolPanelGroupToggle.svelte";
-    import {createBooleanStoreObject} from "../../../stores/BooleanStoreObject";
+    import {createBooleanStore} from "../../../stores/BooleanStoreObject";
     import {onMount} from "svelte";
 
     export let label: string = "";
     export let isOpen:boolean = false;
 
     export const config: ToolPanelGroupHeaderConfigs = {
-        toggle: createBooleanStoreObject(),
+        toggle: createBooleanStore(),
         checkbox: createCheckboxConfigs("Default Label"),
         label: "",
         componentName: "toolPanelGroupHeader"
@@ -42,7 +42,9 @@
     config.toggle.subscribe(value => toggleValue = value);
     config.checkbox.checked.subscribe(value => checkboxdValue = value);
 
-    function handleClick() {isOpen = !isOpen;}
+    function handleClick() {
+isOpen = !isOpen;
+}
 </script>
 
 <div class="contextmenu-group-header bg-dark">

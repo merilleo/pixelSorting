@@ -6,7 +6,7 @@ import {writable} from "svelte/store";
  * @param {boolean} [initialState=false] - The initial state of the boolean store.
  * @return {object} - An object containing methods to subscribe, set, update, toggle, and get the number of the boolean store.
  */
-export function createBooleanStoreObject(initialState: boolean = false) {
+export function createBooleanStore(initialState: boolean = false) {
     const {subscribe, set, update} = writable(initialState);
     let stateValue = initialState; // Introduced variable
 
@@ -29,7 +29,7 @@ export function createBooleanStoreObject(initialState: boolean = false) {
     return {subscribe, setValue, toggle, getValue};
 }
 
-const storeBoolean = createBooleanStoreObject();
+const storeBoolean = createBooleanStore();
 
 /**
  * Represents a store for boolean type.

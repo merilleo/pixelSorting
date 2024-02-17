@@ -21,8 +21,8 @@ Create a function that produces instance of your configuration type.
 ```typescript
 export function createCheckboxConfigs(label:string): CheckboxConfigs { 
     return { 
-        checked: createBooleanStoreObject(), 
-        disabled: createBooleanStoreObject(), 
+        checked: createBooleanStore(), 
+        disabled: createBooleanStore(), 
         label: label, 
         componentName: "checkbox" 
     }; 
