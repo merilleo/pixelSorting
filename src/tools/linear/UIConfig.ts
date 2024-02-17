@@ -29,7 +29,8 @@ const UIConfig: uiConfig[]  = [
                 inputs: [
                     createCheckboxConfigs("el1 group2"),
                     createSwitchConfigs("OFF", "ON"),
-                    createSliderConfigs("float", 5,-10, 10, 0.1, "Kg")
+                    createSliderConfigs("float", 5,-5, 10, 0.1, "Kg"),
+                    createSliderConfigs("integer", 50,0, 100, 1, "")
                 ]
             }
         ]

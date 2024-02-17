@@ -2,12 +2,12 @@ import {writable} from "svelte/store";
 
 export function createNumberStoreObject(number: number = 0) {
     const {subscribe, set, update} = writable(number);
-    function incrementBy(step: number): void {
+    function add(amount: number): void {
         update(value => {
-            return value + step;
+            return value + amount;
         });
     }
-    return {subscribe, set, update, incrementBy};
+    return {subscribe, set, update, add};
 }
 
 const numberStoreObject = createNumberStoreObject();

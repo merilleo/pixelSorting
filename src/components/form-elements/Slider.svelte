@@ -28,7 +28,7 @@
     ): SliderConfigs {
         return {
             mode: mode,
-            number: createNumberStoreObject(),
+            number: createNumberStoreObject(start),
             disabled: createBooleanStoreObject(),
             componentName: "slider",
             start: start,
@@ -53,12 +53,11 @@
     import ErrorMessage from "./utils/ErrorMessage.svelte";
     import ProgressBar from "./utils/ProgressBar.svelte";
 
-    export let config = createSliderConfigs("float", 5,-10, 10, 0.1, "Kg");
+    export let config: SliderConfigs;
 
 
-    export let value: number = 0;
-    export let hasConstraints = true;
-    export let disabled: boolean = false;
+    export let value: number;
+    export let disabled: boolean;
 
     config.number.subscribe(number => value = number);
     config.disabled.subscribe(value => disabled = value);
@@ -68,7 +67,7 @@
     let errorMessageText:string = "";
     let inputElement: HTMLInputElement;
 
-    let stepDrag: number = config.step * 0.5;
+    let stepDragModifier: number = 0.5;
 
     $: displayNumber =  value.toFixed(config.mode === "float" ? 2 : 0);
     $: disabledClass = disabled ? "disabled" : "";
@@ -84,68 +83,77 @@
         showError = true;
     }
 
-    function increment(): void {
+    function addToNumber(step: number): void {
         if (!disabled) {
-            const currentStep = dragging ? stepDrag : config.step;
-            if (value + currentStep > config.max ) {
-                config.number.set(config.max);
-                fireErrorMessage(`${config.max} ${config.unit} is the maximum`);
-            } else {
-                config.number.update(value => value + currentStep);
-            }
-        }
-    }
+            const currentStep = dragging ? stepDragModifier * step : step;
+            const newValue = value + currentStep;
 
-    function decrement(): void {
-        if (!disabled) {
-            const currentStep = dragging ? stepDrag : config.step;
-            if (hasConstraints && value - currentStep < config.min) {
+            if (newValue > config.max ) {
+                config.number.set(config.max);
+
+                fireErrorMessage(`${config.max} ${config.unit} is the maximum`);
+            }
+            else if (newValue < config.min ) {
                 config.number.set(config.min);
+
                 fireErrorMessage(`${config.min} ${config.unit} is the minimum`);
-            } else {
-                config.number.update(value => value - currentStep);
+            }
+            else {
+                config.number.add(currentStep);
             }
         }
     }
 
     function handleMouseDown(mouseDownEvent: MouseEvent) {
+        // Prevent the default action
         mouseDownEvent.preventDefault();
+
+        // Set dragging to true and determine start position
         dragging = true;
         let startX = mouseDownEvent.clientX;
         let currentX = mouseDownEvent.clientX;
+
+        // Movement threshold
         const movementThreshold = 10;
 
         function handleMouseMove(mouseMoveEvent: MouseEvent) {
-            if (!dragging || mouseMoveEvent.target === document.activeElement) {return;}
+            // Check if dragging or target is the active element
+            if (!dragging || mouseMoveEvent.target === document.activeElement) {
+                return;
+            }
 
+            // Determine direction of mouse move
             const deltaX = currentX - mouseMoveEvent.clientX;
 
             if (deltaX < -movementThreshold) {
-                increment() ;
+                addToNumber(config.step);
                 currentX = mouseMoveEvent.clientX;
-            } else if (deltaX > movementThreshold) {
-                decrement();
+            }
+            else if (deltaX > movementThreshold) {
+                addToNumber(-config.step);
                 currentX = mouseMoveEvent.clientX;
             }
         }
 
         function handleMouseUp(mouseUpEvent: MouseEvent) {
+            // Stop dragging and check delta X
             dragging = false;
             const deltaX = Math.abs(startX - mouseUpEvent.clientX);
 
+            // Remove event listeners
             window.removeEventListener("mousemove", handleMouseMove);
             window.removeEventListener("mouseup", handleMouseUp);
 
+            // If movement below threshold, switch to edit mode
             if (deltaX < movementThreshold) {
                 edit = true;
-                // afterUpdate focuses the input element after this
             }
         }
 
+        // Add event listeners for mouse move and up
         window.addEventListener("mousemove", handleMouseMove);
         window.addEventListener("mouseup", handleMouseUp);
     }
-
     function handleFormSubmission(event: SubmitEvent) {
         event.preventDefault();
         inputElement.blur();
@@ -156,10 +164,10 @@
 
         const target = event.target as HTMLInputElement;
         const inputValue = parseStringToFloat(target.value);
-
-        if (!isNaN(inputValue)) {
-            fireErrorMessage(`${inputValue} is not a number`);
-        } else {
+        if (isNaN(inputValue)) {
+            fireErrorMessage(`${target.value} is not a number`);
+        }
+        else {
             config.number.set(getNumberFromInput(inputValue));
         }
 
@@ -177,14 +185,18 @@
 
 
     function handleKeyDownEnter(event: KeyboardEvent) {
-        if (event.key === "Escape" || event.key === "Tab") {return;}
+        if (event.key === "Escape" || event.key === "Tab") return;
+
         event.preventDefault();
+
         if (event.key === "Enter") {
             edit = true;
-        } else if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
-            decrement();
-        } else if (event.key === "ArrowRight" || event.key === "ArrowUp") {
-            increment();
+        }
+        else if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
+            addToNumber(-config.step);
+        }
+        else if (event.key === "ArrowRight" || event.key === "ArrowUp") {
+            addToNumber(config.step);
         }
     }
 </script>
@@ -192,7 +204,7 @@
 
 <div class="input-container input-number {disabledClass}">
     {#if !edit }
-        <button class="number-modifier subtractor bg-darkest color-light" on:click={decrement}>&lt;</button>
+        <button class="number-modifier subtractor bg-darkest color-light" on:click={()=>addToNumber(-config.step)}>&lt;</button>
     {/if}
 
     <form class="number-input-form bg-darkest " on:submit="{handleFormSubmission}">
@@ -203,7 +215,7 @@
                    bind:this={inputElement}
                    value="{displayNumber}"/>
         {:else }
-            <ProgressBar progress="{value / config.max}"/>
+            <ProgressBar progress="{(value - config.min) / (config.max - config.min)}"/>
             <div class="number-display text-thin"
                  on:mousedown={handleMouseDown}
                  role="button" tabindex="0" on:keydown={handleKeyDownEnter}>
@@ -215,7 +227,7 @@
     </form>
 
     {#if !edit}
-        <button class="number-modifier adder bg-darkest" on:click={increment}>&gt;</button>
+        <button class="number-modifier adder bg-darkest" on:click={()=>addToNumber(config.step)}>&gt;</button>
     {/if}
 
     <InputBlocker block="{disabled}" />
