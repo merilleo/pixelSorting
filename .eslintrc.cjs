@@ -67,8 +67,6 @@ module.exports = {
         'prefer': 'type-imports'
       }
     ],
-    // Prevents the use of a variable before it was defined.
-    '@typescript-eslint/no-use-before-define': ['error'],
     // Enforces the usage of semicolons.
     '@typescript-eslint/semi': ['error', 'always'],
     // Enforces consistent use of semicolons as delimiters in both multi-line and single-line member expressions.
@@ -125,7 +123,7 @@ module.exports = {
     // Enforces the usage of single quotes.
     'quotes': [
       'error',
-      'single',
+      'double',
       {
         'avoidEscape': true,
         'allowTemplateLiterals': true
