@@ -7,10 +7,13 @@
     type Icons =  IconKeys;
     export let icon: Icons;
     export let size: number = 1.125;
+    export let inline: boolean = false;
+
+    let inlineStyle = inline ? "inline" : "";
     
 </script>
 
-<div class="icon" style="--width:{size}rem">
+<div class="icon {inlineStyle}" style="--width:{size}rem">
     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"  viewBox="0 0 16 16">
         {@html iconJsonFile[icon]}
     </svg>
@@ -24,5 +27,8 @@
     .icon svg {
         width: var(--width);
         height: var(--width);
+    }
+    .inline {
+        display: inline;
     }
 </style>

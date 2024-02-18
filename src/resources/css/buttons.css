@@ -1,0 +1,26 @@
+.button {
+    height: var(--input-height);
+    padding: calc(0.5 * var(--input-height)) 1rem;
+    display: block;
+    text-align: center;
+    background-color: var(--color-darkest);
+    border: none;
+    border-radius: var(--border-radius);
+    color: var(--color-lighter);
+    margin-bottom: var(--margin-input-container-bottom);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: var(--color-darker);
+}
+
+.button:active {
+    background-color: var(--color-light);
+}
+
+.button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}

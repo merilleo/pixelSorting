@@ -12,7 +12,9 @@
 
     afterUpdate(() => {
         if (show) {
-            setTimeout(()=>{show = false;}, 800);
+            setTimeout(()=>{
+show = false;
+}, 800);
         }
     });
 
@@ -31,6 +33,8 @@
         height: 100%;
         display: none;
         text-align: center;
+        top: 0;
+        left: 0;
     }
     .error-message.show {
         display: flex;

@@ -11,6 +11,7 @@
     } from "../../ComponentLibrary";
 
     import UIConfig from "../../tools/linear/UIConfig";
+    import ImageImport from "../form-elements/ImageImport.svelte";
     export const config = UIConfig;
 </script>
 
@@ -37,6 +38,7 @@
                                 <Switch config="{input}" />
                             {/if}
                         {/each}
+                        <ImageImport />
                     </FormGroup>
                 {/each}
             </ToolPanelGroupBody>
