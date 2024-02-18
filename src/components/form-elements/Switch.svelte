@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
     import {type BooleanStoreType, createBooleanStore} from "../../stores/BooleanStoreObject";
 
-    export type SwitchConfigs = {
+    export type SwitchConfig = {
         checked: BooleanStoreType;
         disabled: BooleanStoreType;
         componentName: "switch";
@@ -9,7 +9,7 @@
         labelOn?: string;
     };
 
-    export function createSwitchConfigs(labelOff?:string, labelOn?:string ): SwitchConfigs {
+    export function createSwitchConfig(labelOff?:string, labelOn?:string ): SwitchConfig {
         return {
             checked: createBooleanStore(),
             disabled: createBooleanStore(),
@@ -24,7 +24,7 @@
     import InputLabel from "./utils/InputLabel.svelte";
     import InputBlocker from "./utils/InputBlocker.svelte";
 
-    export let config: SwitchConfigs = createSwitchConfigs();
+    export let config: SwitchConfig = createSwitchConfig();
 
     let checked: boolean = false;
     let disabled: boolean = false;

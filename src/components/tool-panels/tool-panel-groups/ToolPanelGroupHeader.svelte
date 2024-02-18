@@ -1,10 +1,10 @@
 <script lang="ts" context="module">
-    import type {BooleanStoreType, CheckboxConfigs, ToolPanelGroupToogleConfig} from "../../../TypeLibrary";
+    import type {BooleanStoreType, CheckboxConfig, ToolPanelGroupToogleConfig} from "../../../TypeLibrary";
 
     export type ToolPanelGroupHeaderConfigs = {
         label: string;
         toggle: BooleanStoreType;
-        checkbox: CheckboxConfigs;
+        checkbox: CheckboxConfig;
         componentName: "toolPanelGroupHeader";
     };
 
@@ -13,7 +13,7 @@
 
 <script lang="ts">
 
-    import Checkbox, {createCheckboxConfigs} from "../../form-elements/Checkbox.svelte";
+    import Checkbox, {createCheckboxConfig} from "../../form-elements/Checkbox.svelte";
     import Icon from "../../generals/Icon.svelte";
     import ToolPanelGroupToggle from "./utils/ToolPanelGroupToggle.svelte";
     import {createBooleanStore} from "../../../stores/BooleanStoreObject";
@@ -24,7 +24,7 @@
 
     export const config: ToolPanelGroupHeaderConfigs = {
         toggle: createBooleanStore(),
-        checkbox: createCheckboxConfigs("Default Label"),
+        checkbox: createCheckboxConfig("Default Label"),
         label: "",
         componentName: "toolPanelGroupHeader"
     };

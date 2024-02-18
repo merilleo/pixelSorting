@@ -1,12 +1,14 @@
 <script lang="ts" context="module">
 
 export type ImageImportConfig = {
-
+    componentName: "imageInput";
 };
 
 export function createImageImportConfig(): ImageImportConfig {
 
-    return {};
+    return {
+        componentName: "imageInput"
+    };
 }
 
 </script>

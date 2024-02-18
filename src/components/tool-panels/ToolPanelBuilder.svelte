@@ -36,9 +36,10 @@
                                 <Slider config="{input}"/>
                             {:else if input.componentName === "switch"}
                                 <Switch config="{input}" />
+                            {:else if input.componentName === "imageInput"}
+                                <ImageImport config="{input}" />
                             {/if}
                         {/each}
-                        <ImageImport />
                     </FormGroup>
                 {/each}
             </ToolPanelGroupBody>
