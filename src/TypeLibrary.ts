@@ -21,19 +21,20 @@
  *
  */
 
-import type { CheckboxConfigs } from "./components/form-elements/Checkbox.svelte";
-import type { SliderConfigs } from "./components/form-elements/Slider.svelte";
-import type { SwitchConfigs } from "./components/form-elements/Switch.svelte";
+import type { CheckboxConfig } from "./components/form-elements/Checkbox.svelte";
+import type { SliderConfig } from "./components/form-elements/Slider.svelte";
+import type { SwitchConfig } from "./components/form-elements/Switch.svelte";
+import type {ImageImportConfig} from "./components/form-elements/ImageImport.svelte";
 
 // TODO rename configs to config
 /**
  * Form Element Component Config Types
  */
-export type {CheckboxConfigs} from "./components/form-elements/Checkbox.svelte";
-export type {SwitchConfigs} from "./components/form-elements/Switch.svelte";
-export type {SliderConfigs, NumberTypes} from "./components/form-elements/Slider.svelte";
+export type {CheckboxConfig} from "./components/form-elements/Checkbox.svelte";
+export type {SwitchConfig} from "./components/form-elements/Switch.svelte";
+export type {SliderConfig, NumberTypes} from "./components/form-elements/Slider.svelte";
 
-export type ConfigType = CheckboxConfigs | SwitchConfigs | SliderConfigs;
+export type ConfigType = CheckboxConfig | SwitchConfig | SliderConfig | ImageImportConfig;
 
 /**
  * Tool Panel Component Config Types

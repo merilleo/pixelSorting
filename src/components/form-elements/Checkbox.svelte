@@ -1,7 +1,7 @@
 <script context="module" lang="ts">
     import {createBooleanStore, type BooleanStoreType} from "../../stores/BooleanStoreObject";
 
-    export type CheckboxConfigs = {
+    export type CheckboxConfig = {
         /**
          * Represents the checked state of the Checkbox.
          * Provides a reactive (svelte store) boolean number indicating whether the checkbox is checked.
@@ -29,9 +29,9 @@
      * Creates a Checkbox store object with the provided label.
      *
      * @param {string} label - The label for the Checkbox.
-     * @return {CheckboxConfigs} - The created Checkbox store object.
+     * @return {CheckboxConfig} - The created Checkbox store object.
      */
-    export function createCheckboxConfigs(label:string): CheckboxConfigs {
+    export function createCheckboxConfig(label:string): CheckboxConfig {
         return {
             checked: createBooleanStore(),
             disabled: createBooleanStore(),
@@ -45,7 +45,7 @@
     import InputBlocker from "./utils/InputBlocker.svelte";
     import Icon from "../generals/Icon.svelte";
 
-    export let config: CheckboxConfigs = createCheckboxConfigs("");
+    export let config: CheckboxConfig = createCheckboxConfig("");
 
 
     // tracking store values

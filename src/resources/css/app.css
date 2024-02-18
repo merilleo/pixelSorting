@@ -17,10 +17,11 @@
 16px 1rem
 */
 
-@import 'resets.css';
-@import 'variables.css';
-@import 'fonts.css';
-@import 'typography.css';
-@import 'utility.css';
+@import "resets.css";
+@import "variables.css";
+@import "fonts.css";
+@import "typography.css";
+@import "buttons.css";
+@import "utility.css";
 
 @import "InputComponents.css";

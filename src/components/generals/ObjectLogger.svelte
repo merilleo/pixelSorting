@@ -1,6 +1,6 @@
 <script lang="ts">
     import type {BooleanStoreType, ConfigType} from "../../TypeLibrary";
-    import {createCheckboxConfigs} from "../form-elements/Checkbox.svelte";
+    import {createCheckboxConfig} from "../form-elements/Checkbox.svelte";
     import {createBooleanStore} from "../../stores/BooleanStoreObject";
     import type {NumberStoreType} from "../../stores/NumberStoreObject";
 

@@ -4,7 +4,7 @@
 
     export type NumberTypes = "integer"|"float";
 
-    export type SliderConfigs = {
+    export type SliderConfig = {
         mode: NumberTypes;
         number: NumberStoreType;
         disabled: BooleanStoreType;
@@ -18,14 +18,14 @@
         showError?: boolean;
     };
 
-    export function createSliderConfigs(
+    export function createSliderConfig (
         mode: NumberTypes,
         start: number,
         min: number,
         max: number,
         step: number,
         unit: string
-    ): SliderConfigs {
+    ): SliderConfig {
         return {
             mode: mode,
             number: createNumberStore(start),
@@ -53,7 +53,7 @@
     import ErrorMessage from "./utils/ErrorMessage.svelte";
     import ProgressBar from "./utils/ProgressBar.svelte";
 
-    export let config: SliderConfigs;
+    export let config: SliderConfig;
 
 
     export let value: number;

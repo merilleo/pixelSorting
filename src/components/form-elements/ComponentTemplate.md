@@ -5,7 +5,7 @@ Create and export a data type to represent the configuration of your component.
 ### Example
 
 ```typescript
-export type CheckboxConfigs = { 
+export type CheckboxConfig = { 
     checked: BooleanStoreType; 
     disabled: BooleanStoreType; 
     componentName: "checkbox"; 
@@ -19,7 +19,7 @@ Create a function that produces instance of your configuration type.
 ### Example
 
 ```typescript
-export function createCheckboxConfigs(label:string): CheckboxConfigs { 
+export function createCheckboxConfig(label:string): CheckboxConfig { 
     return { 
         checked: createBooleanStore(), 
         disabled: createBooleanStore(), 

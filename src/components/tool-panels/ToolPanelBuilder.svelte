@@ -11,6 +11,7 @@
     } from "../../ComponentLibrary";
 
     import UIConfig from "../../tools/linear/UIConfig";
+    import ImageImport from "../form-elements/ImageImport.svelte";
     export const config = UIConfig;
 </script>
 
@@ -35,6 +36,8 @@
                                 <Slider config="{input}"/>
                             {:else if input.componentName === "switch"}
                                 <Switch config="{input}" />
+                            {:else if input.componentName === "imageInput"}
+                                <ImageImport config="{input}" />
                             {/if}
                         {/each}
                     </FormGroup>
