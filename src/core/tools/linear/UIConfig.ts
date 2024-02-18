@@ -1,8 +1,8 @@
-import {createCheckboxConfig} from "../../components/form-elements/Checkbox.svelte";
-import type {ConfigType} from "../../TypeLibrary";
-import {createSwitchConfig} from "../../components/form-elements/Switch.svelte";
-import {createSliderConfig} from "../../components/form-elements/Slider.svelte";
-import {createImageImportConfig} from "../../components/form-elements/ImageImport.svelte";
+import type {ConfigType} from "../../../TypeLibrary";
+import {createCheckboxConfig} from "../../../components/form-elements/Checkbox.svelte";
+import {createSwitchConfig} from "../../../components/form-elements/Switch.svelte";
+import {createSliderConfig} from "../../../components/form-elements/Slider.svelte";
+import {createImageImportConfig} from "../../../components/form-elements/ImageImport.svelte";
 
 
 export type uiConfig = {
@@ -19,7 +19,7 @@ export type uiConfig = {
 const UIConfig: uiConfig[]  = [
     {
         header: {
-            title: "panelGrouHeader",
+            title: "panelGroupHeader",
             inputs: [
                 createCheckboxConfig("")
             ]

@@ -15,10 +15,10 @@ export function createImageImportConfig(): ImageImportConfig {
 
 <script lang="ts">
     import ErrorMessage from "./utils/ErrorMessage.svelte";
-    import {Icon} from "../../ComponentLibrary";
     import Spinner from "../generals/Spinner.svelte";
+    import Icon from "../generals/Icon.svelte";
 
-    let image:string;
+    let image:string = "";
     let isReading: boolean = false;
     let showError:boolean = false;
     let errorMessageText:string = "";
@@ -67,8 +67,9 @@ export function createImageImportConfig(): ImageImportConfig {
         {#if isReading}
             <div class="loading-text">Loading Image</div>
             <Spinner />
-        {/if}
-        {#if image !== "" && !isReading}
+        {:else if image === "" && !isReading}
+            <Icon icon="image" size="{2}" fill="mid"/>
+        {:else if image !== "" && !isReading}
             <img src="{image}" alt="" />
         {/if}
     </div>

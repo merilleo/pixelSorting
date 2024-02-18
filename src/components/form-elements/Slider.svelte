@@ -1,6 +1,7 @@
 <script lang="ts" context="module">
-    import {type BooleanStoreType, createBooleanStore} from "../../stores/BooleanStoreObject";
-    import {createNumberStore, type NumberStoreType} from "../../stores/NumberStoreObject";
+
+    import {createNumberStore, type NumberStoreType} from "../../core/stores/NumberStoreObject";
+    import {type BooleanStoreType, createBooleanStore} from "../../core/stores/BooleanStoreObject";
 
     export type NumberTypes = "integer"|"float";
 
@@ -14,8 +15,6 @@
         max: number;
         step: number;
         unit: string;
-        hasConstraints?: boolean;
-        showError?: boolean;
     };
 
     export function createSliderConfig (
@@ -36,8 +35,6 @@
             max: max,
             step: step,
             unit: unit,
-            hasConstraints: true,
-            showError: true,
         };
     }
 </script>
@@ -49,19 +46,20 @@
         clamp,
         isOutOfRange,
         parseStringToFloat
-    } from "../../utils/MathUtils";
+    } from "../../core/utils/MathUtils";
     import ErrorMessage from "./utils/ErrorMessage.svelte";
     import ProgressBar from "./utils/ProgressBar.svelte";
 
     export let config: SliderConfig;
 
 
-    export let value: number;
-    export let disabled: boolean;
+    let value: number;
+    let disabled: boolean;
 
     config.number.subscribe(number => value = number);
     config.disabled.subscribe(value => disabled = value);
-    export let showError = false;
+
+    let showError = false;
     let dragging: boolean = false;
     let edit: boolean = false;
     let errorMessageText:string = "";

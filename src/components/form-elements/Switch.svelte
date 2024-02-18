@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
-    import {type BooleanStoreType, createBooleanStore} from "../../stores/BooleanStoreObject";
+
+    import {type BooleanStoreType, createBooleanStore} from "../../core/stores/BooleanStoreObject";
 
     export type SwitchConfig = {
         checked: BooleanStoreType;

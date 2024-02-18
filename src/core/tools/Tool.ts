@@ -1,5 +1,5 @@
 
-class Tool {
+export default class Tool {
     name: string;
     uiConfig: any;
 

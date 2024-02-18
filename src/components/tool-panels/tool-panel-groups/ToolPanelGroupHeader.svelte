@@ -1,5 +1,7 @@
 <script lang="ts" context="module">
-    import type {BooleanStoreType, CheckboxConfig, ToolPanelGroupToogleConfig} from "../../../TypeLibrary";
+
+    import type {BooleanStoreType} from "../../../core/stores/BooleanStoreObject";
+    import type {CheckboxConfig} from "../../form-elements/Checkbox.svelte";
 
     export type ToolPanelGroupHeaderConfigs = {
         label: string;
@@ -16,8 +18,8 @@
     import Checkbox, {createCheckboxConfig} from "../../form-elements/Checkbox.svelte";
     import Icon from "../../generals/Icon.svelte";
     import ToolPanelGroupToggle from "./utils/ToolPanelGroupToggle.svelte";
-    import {createBooleanStore} from "../../../stores/BooleanStoreObject";
     import {onMount} from "svelte";
+    import {createBooleanStore} from "../../../core/stores/BooleanStoreObject";
 
     export let label: string = "";
     export let isOpen:boolean = false;
@@ -43,8 +45,8 @@
     config.checkbox.checked.subscribe(value => checkboxdValue = value);
 
     function handleClick() {
-isOpen = !isOpen;
-}
+        isOpen = !isOpen;
+    }
 </script>
 
 <div class="contextmenu-group-header bg-dark">

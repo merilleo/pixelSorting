@@ -5,8 +5,8 @@
     import ToolboxGroup from "./components/toolbox-panels/ToolboxPanelGroup.svelte";
     import ToolboxPanelButton from "./components/toolbox-panels/ToolboxPanelButton.svelte";
     import ToolPanelBuilder from "./components/tool-panels/ToolPanelBuilder.svelte";
+    import UIConfig from "./core/tools/linear/UIConfig";
 
-    import UIConfig from "./tools/linear/UIConfig";
 
 </script>
 
