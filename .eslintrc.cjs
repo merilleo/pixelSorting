@@ -107,10 +107,12 @@ module.exports = {
         'src/**/': 'KEBAB_CASE',
       }
     ],
-        // Enforces the use of === and !== over == and !=.
+    // Enforces 'else' or 'else if' to be on the next line to the closing brace from the previous block.
+    "brace-style": ["error", "stroustrup"],
+    // Enforces use of curly braces except for one-liners.
+    "curly": ["error", "multi-line"],
+    // Enforces the use of === and !== over == and !=.
     'eqeqeq': 2,
-    // Enforces consistent use of curly braces.
-    'curly': 1,
     // Warns when a defined variable is not used.
     'no-unused-vars': [
       'warn',
