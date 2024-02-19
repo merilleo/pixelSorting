@@ -18,7 +18,7 @@
 
     import Icon from "../../../generals/Icon.svelte";
 
-    export const openStore: BooleanStoreType = createBooleanStore();
+    export let openStore: BooleanStoreType;
     let open: boolean = true;
 
     openStore.subscribe(value => open = value);

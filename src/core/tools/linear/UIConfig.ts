@@ -3,13 +3,14 @@ import {createCheckboxConfig} from "../../../components/form-elements/Checkbox.s
 import {createSwitchConfig} from "../../../components/form-elements/Switch.svelte";
 import {createSliderConfig} from "../../../components/form-elements/Slider.svelte";
 import {createImageImportConfig} from "../../../components/form-elements/ImageImport.svelte";
+import {type BooleanStoreType, createBooleanStore} from "../../stores/BooleanStoreObject";
+import {
+    createToolPanelGroupHeaderConfig, type ToolPanelGroupHeaderConfig
+} from "../../../components/tool-panels/tool-panel-groups/ToolPanelGroupHeader.svelte";
 
 
 export type uiConfig = {
-    header: {
-        title: string;
-        inputs: ConfigType[];
-    };
+    header: ToolPanelGroupHeaderConfig;
     body: {
         title: string;
         inputs: ConfigType[];
@@ -18,12 +19,8 @@ export type uiConfig = {
 
 const UIConfig: uiConfig[]  = [
     {
-        header: {
-            title: "panelGroupHeader",
-            inputs: [
-                createCheckboxConfig("")
-            ]
-        },
+        header: createToolPanelGroupHeaderConfig("test", createCheckboxConfig("")),
+
         body: [
             {
                 title: "Form Group Title",

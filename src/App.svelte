@@ -7,11 +7,9 @@
     import ToolPanelBuilder from "./components/tool-panels/ToolPanelBuilder.svelte";
     import UIConfig from "./core/tools/linear/UIConfig";
 
-
 </script>
 
 <main class="bg-darkest">
-
     <ToolboxPanel>
         <ToolboxGroup>
             <ToolboxPanelButton> <Icon icon="filter-left" /></ToolboxPanelButton>
@@ -24,8 +22,6 @@
     </ToolboxPanel>
 
     <ToolPanelBuilder config="{UIConfig}" />
-
-
 </main>
 
 <style>
