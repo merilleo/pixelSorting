@@ -1,32 +1,26 @@
 <script lang="ts">
-    import {
-        Checkbox,
-        Slider,
-        Switch,
-        FormGroup,
-        ToolPanel,
-        ToolPanelGroup,
-        ToolPanelGroupBody,
-        ToolPanelGroupHeader
-    } from "../../ComponentLibrary";
-
-    import UIConfig from "../../tools/linear/UIConfig";
+    // Todo implement disabled status for form elements
     import ImageImport from "../form-elements/ImageImport.svelte";
+    import ToolPanel from "./ToolPanel.svelte";
+    import ToolPanelGroup from "./tool-panel-groups/ToolPanelGroup.svelte";
+    import ToolPanelGroupHeader from "./tool-panel-groups/ToolPanelGroupHeader.svelte";
+    import Checkbox from "../form-elements/Checkbox.svelte";
+    import ToolPanelGroupBody from "./tool-panel-groups/ToolPanelGroupBody.svelte";
+    import FormGroup from "../form-elements/FormGroup.svelte";
+    import Slider from "../form-elements/Slider.svelte";
+    import Switch from "../form-elements/Switch.svelte";
+    import UIConfig from "../../core/tools/linear/UIConfig";
     export const config = UIConfig;
+
+
 </script>
 
 
 <ToolPanel>
     {#each config as { header, body }}
         <ToolPanelGroup>
-            <ToolPanelGroupHeader label={ header.title } >
-                {#each header.inputs as input}
-                    {#if input.componentName === "checkbox"}
-                        <Checkbox config="{input}" />
-                    {/if}
-                {/each}
-            </ToolPanelGroupHeader>
-            <ToolPanelGroupBody>
+            <ToolPanelGroupHeader config="{header}" />
+            <ToolPanelGroupBody openStore="{header.toggle}" disabledStore="{header.checkbox}">
                 {#each body as group}
                     <FormGroup label="{group.title}">
                         {#each group.inputs as input }

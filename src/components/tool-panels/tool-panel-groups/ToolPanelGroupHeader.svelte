@@ -1,59 +1,54 @@
 <script lang="ts" context="module">
-    import type {BooleanStoreType, CheckboxConfig, ToolPanelGroupToogleConfig} from "../../../TypeLibrary";
 
-    export type ToolPanelGroupHeaderConfigs = {
-        label: string;
+    import {type BooleanStoreType, createBooleanStore} from "../../../core/stores/BooleanStoreObject";
+    import type {CheckboxConfig} from "../../form-elements/Checkbox.svelte";
+    import {createToolPanelGroupToogleConfig} from "./utils/ToolPanelGroupToggle.svelte";
+
+    export type ToolPanelGroupHeaderConfig = {
+        title: string;
         toggle: BooleanStoreType;
-        checkbox: CheckboxConfig;
+        checkbox: CheckboxConfig | null;
         componentName: "toolPanelGroupHeader";
     };
 
+    export function createToolPanelGroupHeaderConfig(title: string, checkboxConfig: CheckboxConfig | null): ToolPanelGroupHeaderConfig {
+        return {
+            title: title,
+            toggle: createBooleanStore(true),
+            checkbox: checkboxConfig,
+            componentName: "toolPanelGroupHeader",
+        };
+    }
 
 </script>
 
 <script lang="ts">
 
-    import Checkbox, {createCheckboxConfig} from "../../form-elements/Checkbox.svelte";
-    import Icon from "../../generals/Icon.svelte";
+    import Checkbox from "../../form-elements/Checkbox.svelte";
     import ToolPanelGroupToggle from "./utils/ToolPanelGroupToggle.svelte";
-    import {createBooleanStore} from "../../../stores/BooleanStoreObject";
-    import {onMount} from "svelte";
 
-    export let label: string = "";
-    export let isOpen:boolean = false;
+    export let config: ToolPanelGroupHeaderConfig;
 
-    export const config: ToolPanelGroupHeaderConfigs = {
-        toggle: createBooleanStore(),
-        checkbox: createCheckboxConfig("Default Label"),
-        label: "",
-        componentName: "toolPanelGroupHeader"
-    };
+    let isOpen:boolean = false;
+    let disabled:boolean = false;
 
-    onMount(() => {
-        config.toggle.setValue(true);
-        config.checkbox.checked.setValue(true);
-        config.label = label;
-        config.componentName = "toolPanelGroupHeader";
-    });
+    config.toggle.subscribe(value => isOpen = value);
 
-    // tracking store values
-    let toggleValue: boolean;
-    let checkboxdValue: boolean;
-    config.toggle.subscribe(value => toggleValue = value);
-    config.checkbox.checked.subscribe(value => checkboxdValue = value);
+    if (config.checkbox !== null) {
+        config.checkbox.checked.subscribe(value => disabled = value);
+    }
 
-    function handleClick() {
-isOpen = !isOpen;
-}
 </script>
 
-<div class="contextmenu-group-header bg-dark">
+<div class="contextmenu-group-header bg-dark {isOpen}">
 
     <div class="contextmenu-left">
         <ToolPanelGroupToggle openStore="{config.toggle}"/>
-        <slot></slot>
-        {#if label}
-            <p class="label text-thin">{config.label}</p>
+        {#if config.checkbox !== null}
+            <Checkbox config="{config.checkbox}" />
+        {/if}
+        {#if config.title}
+            <p class="label text-thin">{config.title}</p>
         {/if}
     </div>
 </div>

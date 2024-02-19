@@ -15,10 +15,11 @@ export function createImageImportConfig(): ImageImportConfig {
 
 <script lang="ts">
     import ErrorMessage from "./utils/ErrorMessage.svelte";
-    import {Icon} from "../../ComponentLibrary";
     import Spinner from "../generals/Spinner.svelte";
+    import Icon from "../generals/Icon.svelte";
+    import ImageCollection from "../../core/image/ImageCollection";
 
-    let image:string;
+    let imageUrl:string = "";
     let isReading: boolean = false;
     let showError:boolean = false;
     let errorMessageText:string = "";
@@ -35,20 +36,23 @@ export function createImageImportConfig(): ImageImportConfig {
         }
 
         const file: File = inputElement.files[0];
-        const fileReader: FileReader = new FileReader();
+        const readImageUrl = URL.createObjectURL(file);
 
-        fileReader.onload = (event) => {
-            if (!event.target) {
+        const img = new ImageCollection();
+        img.initialize(readImageUrl)
+            .then(() => {
+                URL.revokeObjectURL(imageUrl);
+                // img.originalImagePreview.filterRedChannel();
+                imageUrl = img.originalImagePreview.url;
+            })
+            .catch((error) => {
                 errorMessageText = "Image could not be read";
                 showError = true;
+                URL.revokeObjectURL(readImageUrl);
+            })
+            .finally(() => {
                 isReading = false;
-                return;
-            }
-            image = event.target.result as string;
-            isReading = false;
-        };
-
-        fileReader.readAsDataURL(file);
+            });
     }
 </script>
 <div class="input-container input-image">
@@ -67,9 +71,10 @@ export function createImageImportConfig(): ImageImportConfig {
         {#if isReading}
             <div class="loading-text">Loading Image</div>
             <Spinner />
-        {/if}
-        {#if image !== "" && !isReading}
-            <img src="{image}" alt="" />
+        {:else if imageUrl === "" && !isReading}
+            <Icon icon="image" size="{2}" fill="mid"/>
+        {:else if imageUrl !== "" && !isReading}
+            <img src="{imageUrl}" alt="" />
         {/if}
     </div>
 

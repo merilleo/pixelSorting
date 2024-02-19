@@ -5,15 +5,17 @@
 
     type IconKeys = keyof typeof iconJsonFile;
     type Icons =  IconKeys;
+    type FillColors = "darkest" | "darker" | "dark" | "mid" | "light" | "lighter";
     export let icon: Icons;
     export let size: number = 1.125;
     export let inline: boolean = false;
+    export let fill: FillColors = "lighter";
 
     let inlineStyle = inline ? "inline" : "";
     
 </script>
 
-<div class="icon {inlineStyle}" style="--width:{size}rem">
+<div class="icon {inlineStyle}" style="--width:{size}rem; --fill:var(--color-{fill})">
     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"  viewBox="0 0 16 16">
         {@html iconJsonFile[icon]}
     </svg>
@@ -27,6 +29,7 @@
     .icon svg {
         width: var(--width);
         height: var(--width);
+        fill: var(--fill)
     }
     .inline {
         display: inline;

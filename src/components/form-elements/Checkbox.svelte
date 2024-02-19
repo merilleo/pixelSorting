@@ -1,5 +1,6 @@
 <script context="module" lang="ts">
-    import {createBooleanStore, type BooleanStoreType} from "../../stores/BooleanStoreObject";
+
+    import {type BooleanStoreType, createBooleanStore} from "../../core/stores/BooleanStoreObject";
 
     export type CheckboxConfig = {
         /**
