@@ -1,6 +1,6 @@
 import {rgbaToUint32, convertUint8To32Array, red} from "../utils/ColorUtils";
 
-export default class ImageObject {
+export default class SingleImage {
     width: number;
     height: number;
     data: Uint32Array;
@@ -12,28 +12,35 @@ export default class ImageObject {
         this.url = "";
     }
 
-    loadImage(imageUrl: string): Promise<void> {
+    loadImage(imageUrl: string, maxWidth?: number, maxHeight?: number): Promise<void> {
         return new Promise((resolve, reject) => {
 
             this.url = imageUrl;
 
             const img = new window.Image();
             img.onload = () => {
-                this.width = img.width;
-                this.height = img.height;
+                let currentWidth = img.width;
+                let currentHeight = img.height;
+                if (maxWidth !== undefined) {
+                    currentWidth = maxWidth;
+                }
+                if (maxHeight !== undefined) {
+                    currentHeight = maxHeight;
+                }
+                this.setResizedDimensions(currentWidth, currentHeight, img.width, img.height);
 
                 const canvas = document.createElement("canvas");
-                canvas.width = img.width;
-                canvas.height = img.height;
+                canvas.width = this.width;
+                canvas.height = this.height;
 
                 const context = canvas.getContext("2d");
                 if (!context) {
                     throw new Error("Unable to get canvas context for Image");
                 }
 
-                context.drawImage(img, 0, 0);
+                context.drawImage(img, 0, 0, this.width, this.height);
 
-                const imageData = context.getImageData(0, 0, img.width, img.height, { colorSpace: "srgb" });
+                const imageData = context.getImageData(0, 0, this.width, this.height, { colorSpace: "srgb" });
                 this.data = convertUint8To32Array(imageData.data);
                 this.updateUrl();
                 resolve();
@@ -43,6 +50,19 @@ export default class ImageObject {
 
             img.src = imageUrl; // Using the object URL directly
         });
+    }
+
+    setResizedDimensions(maxWidth: number, maxHeight: number, imageWidth: number, imageHeight: number) {
+        const aspectRatio = imageWidth / imageHeight;
+
+        if (imageWidth > imageHeight) {
+            this.width = Math.floor(maxWidth);
+            this.height = Math.floor(maxWidth / aspectRatio);
+        }
+        else {
+            this.height = Math.floor(maxHeight);
+            this.width = Math.floor(maxHeight * aspectRatio);
+        }
     }
 
     updateUrl(): void {
@@ -67,12 +87,12 @@ export default class ImageObject {
         this.url = canvas.toDataURL();
 
     }
-    /*filterRedChannel() {
+    filterRedChannel() {
         for (let i = 0; i < this.data.length; i++) {
             this.data[i] = rgbaToUint32(red(this.data[i]), 0, 0, 255);
         }
         this.updateUrl();
-    }*/
+    }
 
     /*getBrightness(pixel: number): number {
         const r = (pixel >> 24) & 0xFF;

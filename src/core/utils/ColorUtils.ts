@@ -1,4 +1,4 @@
-import ImageObject from "../image/ImageObject";
+import SingleImage from "../image/SingleImage";
 
 export function isLittleEndian() {
     const buffer = new ArrayBuffer(2);
@@ -42,6 +42,7 @@ export const rgbaToUint32: RGBAToU32Function = isLittleEndianSystem ?
         b = b < 0 ? 0 : b > 255 ? 255 : b;
         return (a) | (b << 8) | (g << 16) | (r << 24);
     };
+
 
 type GetColorFunction= (color:number) => number;
 

@@ -17,7 +17,7 @@ export function createImageImportConfig(): ImageImportConfig {
     import ErrorMessage from "./utils/ErrorMessage.svelte";
     import Spinner from "../generals/Spinner.svelte";
     import Icon from "../generals/Icon.svelte";
-    import ImageObject from "../../core/image/ImageObject";
+    import ImageCollection from "../../core/image/ImageCollection";
 
     let imageUrl:string = "";
     let isReading: boolean = false;
@@ -36,20 +36,19 @@ export function createImageImportConfig(): ImageImportConfig {
         }
 
         const file: File = inputElement.files[0];
-        imageUrl = URL.createObjectURL(file);
+        const readImageUrl = URL.createObjectURL(file);
 
-        const img = new ImageObject();
-        img.loadImage(imageUrl)
+        const img = new ImageCollection();
+        img.initialize(readImageUrl)
             .then(() => {
                 URL.revokeObjectURL(imageUrl);
-                // img.sort();
-                // img.filterRedChannel();
-                imageUrl = img.url;
+                // img.originalImagePreview.filterRedChannel();
+                imageUrl = img.originalImagePreview.url;
             })
             .catch((error) => {
                 errorMessageText = "Image could not be read";
                 showError = true;
-                URL.revokeObjectURL(imageUrl);
+                URL.revokeObjectURL(readImageUrl);
             })
             .finally(() => {
                 isReading = false;
