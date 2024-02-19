@@ -47,34 +47,42 @@ type GetColorFunction= (color:number) => number;
 
 export const red: GetColorFunction = isLittleEndianSystem ?
     function(color: number): number {
-        return color & 0xFF;
+        const value = color & 0xFF;
+        return value < 0 ? 0 : value > 255 ? 255 : value;
     } :
     function(color: number): number {
-        return (color >> 24) & 0xFF;
+        const value = (color >> 24) & 0xFF;
+        return value < 0 ? 0 : value > 255 ? 255 : value;
     };
 
 export const green: GetColorFunction = isLittleEndianSystem ?
     function(color: number): number {
-        return (color >> 8) & 0xFF;
+        const value = (color >> 8) & 0xFF;
+        return value < 0 ? 0 : value > 255 ? 255 : value;
     } :
     function(color: number): number {
-        return (color >> 16) & 0xFF;
+        const value = (color >> 16) & 0xFF;
+        return value < 0 ? 0 : value > 255 ? 255 : value;
     };
 
 export const blue: GetColorFunction = isLittleEndianSystem ?
     function(color: number): number {
-        return (color >> 16) & 0xFF;
+        const value = (color >> 16) & 0xFF;
+        return value < 0 ? 0 : value > 255 ? 255 : value;
     } :
     function(color: number): number {
-        return (color >> 8) & 0xFF;
+        const value = (color >> 8) & 0xFF;
+        return value < 0 ? 0 : value > 255 ? 255 : value;
     };
 
 export const alpha: GetColorFunction = isLittleEndianSystem ?
     function(color: number): number {
-        return (color >> 24) & 0xFF;
+        const value = (color >> 24) & 0xFF;
+        return value < 0 ? 0 : value > 255 ? 255 : value;
     } :
     function(color: number): number {
-        return color & 0xFF;
+        const value = color & 0xFF;
+        return value < 0 ? 0 : value > 255 ? 255 : value;
     };
 
 /*export function drawToCanvas(imageData: ImageData): HTMLCanvasElement {
