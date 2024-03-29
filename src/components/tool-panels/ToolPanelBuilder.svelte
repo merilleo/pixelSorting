@@ -10,6 +10,7 @@
     import Slider from "../form-elements/Slider.svelte";
     import Switch from "../form-elements/Switch.svelte";
     import UIConfig from "../../core/tools/linear/UIConfig";
+    import Dropdown from "../form-elements/Dropdown.svelte";
     export const config = UIConfig;
 
 
@@ -32,6 +33,8 @@
                                 <Switch config="{input}" />
                             {:else if input.componentName === "imageInput"}
                                 <ImageImport config="{input}" />
+                            {:else if input.componentName === "dropdown"}
+                                <Dropdown config="{input}" />
                             {/if}
                         {/each}
                     </FormGroup>
@@ -39,4 +42,5 @@
             </ToolPanelGroupBody>
         </ToolPanelGroup>
     {/each}
+
 </ToolPanel>
