@@ -1,7 +1,7 @@
 <script lang="ts">
     import Resizer from "./utils/Resizer.svelte";
 
-    let width: number = 300;
+    let width: number = 500;
 
 </script>
 
