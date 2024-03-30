@@ -28,7 +28,6 @@
   "dependencies": {
     "@types/p5": "^1.6.2",
     "p5": "^1.7.0",
-    "svelte-bootstrap-icons": "^3.0.0",
     "svelte-preprocess": "^5.1.3"
   }
 }
