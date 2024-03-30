@@ -2,40 +2,37 @@
 
     import {createNumberStore, type NumberStoreType} from "../../core/stores/NumberStoreObject";
     import {type BooleanStoreType, createBooleanStore} from "../../core/stores/BooleanStoreObject";
+    import {BaseConfig} from "../../core/tools/BaseConfig";
 
     export type NumberTypes = "integer"|"float";
 
-    export type SliderConfig = {
+    export class SliderConfig extends BaseConfig {
         mode: NumberTypes;
         number: NumberStoreType;
         disabled: BooleanStoreType;
-        componentName: "slider";
         start: number;
         min: number;
         max: number;
         step: number;
         unit: string;
-    };
-
-    export function createSliderConfig (
-        mode: NumberTypes,
-        start: number,
-        min: number,
-        max: number,
-        step: number,
-        unit: string
-    ): SliderConfig {
-        return {
-            mode: mode,
-            number: createNumberStore(start),
-            disabled: createBooleanStore(),
-            componentName: "slider",
-            start: start,
-            min: min,
-            max: max,
-            step: step,
-            unit: unit,
-        };
+        constructor(
+            mode: NumberTypes,
+            start: number,
+            min: number,
+            max: number,
+            step: number,
+            unit: string
+        ) {
+            super("slider");
+            this.mode = mode;
+            this.number = createNumberStore(start);
+            this.disabled = createBooleanStore();
+            this.start = start;
+            this.min = min;
+            this.max = max;
+            this.step = step;
+            this.unit = unit;
+        }
     }
 </script>
 

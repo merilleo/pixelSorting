@@ -1,44 +1,19 @@
 <script context="module" lang="ts">
 
     import {type BooleanStoreType, createBooleanStore} from "../../core/stores/BooleanStoreObject";
+    import {BaseConfig} from "../../core/tools/BaseConfig";
 
-    export type CheckboxConfig = {
-        /**
-         * Represents the checked state of the Checkbox.
-         * Provides a reactive (svelte store) boolean number indicating whether the checkbox is checked.
-         */
+    export class CheckboxConfig extends BaseConfig {
         checked: BooleanStoreType;
-
-        /**
-         * Represents the disabled state of the Checkbox.
-         * Provides a reactive (svelte store) boolean number indicating whether the checkbox is disabled.
-         */
         disabled: BooleanStoreType;
+        label: string;
 
-        /**
-         * A constant prop indicating the type of the component.
-         */
-        componentName: "checkbox";
-
-        /**
-         * Optional property. If provided, it will be used as the label of the Checkbox.
-         */
-        label?: string;
-    };
-
-    /**
-     * Creates a Checkbox store object with the provided label.
-     *
-     * @param {string} label - The label for the Checkbox.
-     * @return {CheckboxConfig} - The created Checkbox store object.
-     */
-    export function createCheckboxConfig(label:string): CheckboxConfig {
-        return {
-            checked: createBooleanStore(),
-            disabled: createBooleanStore(),
-            label: label,
-            componentName: "checkbox"
-        };
+        constructor(label?:string) {
+            super("checkbox");
+            this.checked = createBooleanStore();
+            this.disabled = createBooleanStore();
+            this.label = label === undefined ? "" : label;
+        }
     }
 </script>
 <script lang="ts">
@@ -46,7 +21,7 @@
     import InputBlocker from "./utils/InputBlocker.svelte";
     import Icon from "../generals/Icon.svelte";
 
-    export let config: CheckboxConfig = createCheckboxConfig("");
+    export let config: CheckboxConfig = new CheckboxConfig();
 
 
     // tracking store values
@@ -57,11 +32,19 @@
 
     $: checkedClass = checked ? "checked" : "";
 
+    function handleKeyUp(event: KeyboardEvent): void {
+        event.preventDefault();
+
+        if (event.key === "Enter") {
+            config.checked.toggle;
+        }
+    }
+
 </script>
 <div class="checkbox-container input-container">
     <div class="checkbox bg-darkest  {checkedClass}"
          on:click={config.checked.toggle}
-         role="checkbox" aria-checked="{checked}" tabindex="0" on:keyup={config.checked.toggle}>
+         role="checkbox" aria-checked="{checked}" tabindex="0" on:keyup={handleKeyUp}>
         {#if checked }
             <Icon icon="check" size="{1.5}"/>
         {/if}

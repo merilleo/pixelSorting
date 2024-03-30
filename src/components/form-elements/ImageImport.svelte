@@ -1,15 +1,12 @@
 <script lang="ts" context="module">
 
-export type ImageImportConfig = {
-    componentName: "imageInput";
-};
+    import {BaseConfig} from "../../core/tools/BaseConfig";
 
-export function createImageImportConfig(): ImageImportConfig {
-
-    return {
-        componentName: "imageInput"
-    };
-}
+    export class ImageImportConfig extends BaseConfig {
+        constructor() {
+            super("imageInput");
+        }
+    }
 
 </script>
 

@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
 
     import {type BooleanStoreType, createBooleanStore} from "../../../core/stores/BooleanStoreObject";
-    import type {CheckboxConfig} from "../../form-elements/Checkbox.svelte";
+    import type {CheckboxConfig, CheckboxConfig} from "../../form-elements/Checkbox.svelte";
     import {createToolPanelGroupToogleConfig} from "./utils/ToolPanelGroupToggle.svelte";
 
     export type ToolPanelGroupHeaderConfig = {
@@ -11,7 +11,7 @@
         componentName: "toolPanelGroupHeader";
     };
 
-    export function createToolPanelGroupHeaderConfig(title: string, checkboxConfig: CheckboxConfig | null): ToolPanelGroupHeaderConfig {
+    export function createToolPanelGroupHeaderConfig(title: string, checkboxConfig: CheckboxConfig | CheckboxConfig | null): ToolPanelGroupHeaderConfig {
         return {
             title: title,
             toggle: createBooleanStore(true),
