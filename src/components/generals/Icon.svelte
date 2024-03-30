@@ -1,12 +1,14 @@
-<script lang="ts">
-
+<script lang="ts" context="module">
     import iconJsonFile from "../../resources/icons/bootstrapIcons.json";
 
+    export type IconName = keyof typeof iconJsonFile;
+</script>
 
-    type IconKeys = keyof typeof iconJsonFile;
-    type Icons =  IconKeys;
+<script lang="ts">
+
+
     type FillColors = "darkest" | "darker" | "dark" | "mid" | "light" | "lighter";
-    export let icon: Icons;
+    export let icon: IconName;
     export let size: number = 1.125;
     export let inline: boolean = false;
     export let fill: FillColors = "lighter";

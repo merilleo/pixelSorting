@@ -1,35 +1,42 @@
-import type {ConfigType} from "../../../TypeLibrary";
-import {createCheckboxConfig} from "../../../components/form-elements/Checkbox.svelte";
-import {createSwitchConfig} from "../../../components/form-elements/Switch.svelte";
-import {createSliderConfig} from "../../../components/form-elements/Slider.svelte";
-import {createImageImportConfig} from "../../../components/form-elements/ImageImport.svelte";
-import {type BooleanStoreType, createBooleanStore} from "../../stores/BooleanStoreObject";
+import {CheckboxConfig} from "../../../components/form-elements/Checkbox.svelte";
+import {SwitchConfig} from "../../../components/form-elements/Switch.svelte";
+import {SliderConfig} from "../../../components/form-elements/Slider.svelte";
+import {ImageImportConfig} from "../../../components/form-elements/ImageImport.svelte";
 import {
     createToolPanelGroupHeaderConfig, type ToolPanelGroupHeaderConfig
 } from "../../../components/tool-panels/tool-panel-groups/ToolPanelGroupHeader.svelte";
+import {DropdownConfig, DropdownItem} from "../../../components/form-elements/Dropdown.svelte";
+import type {BaseConfig} from "../BaseConfig";
 
 
 export type uiConfig = {
     header: ToolPanelGroupHeaderConfig;
     body: {
         title: string;
-        inputs: ConfigType[];
+        inputs: BaseConfig[];
     }[];
 };
 
-const UIConfig: uiConfig[]  = [
+const UIConfig: uiConfig[] = [
     {
-        header: createToolPanelGroupHeaderConfig("test", createCheckboxConfig("")),
+        header: createToolPanelGroupHeaderConfig(
+            "test",
+            new CheckboxConfig("Config Class")
+        ),
 
         body: [
             {
-                title: "Form Group Title",
+                title: "Config Classes",
                 inputs: [
-                    createCheckboxConfig("el1 group2"),
-                    createSwitchConfig("OFF", "ON"),
-                    createSliderConfig("float", 5,-5, 10, 0.1, "Kg"),
-                    createSliderConfig("integer", 50,0, 100, 1, ""),
-                    createImageImportConfig(),
+                    new CheckboxConfig("Config Class"),
+                    new SwitchConfig("OFF", "ON"),
+                    new SliderConfig("float", 5,-5, 10, 0.1, "Kg"),
+                    new SliderConfig("integer", 50,0, 100, 1, ""),
+                    new DropdownConfig([
+                        new DropdownItem("Label 1", "val1", "image"),
+                        new DropdownItem("Label 2", "val2")
+                    ]),
+                    new ImageImportConfig(),
                 ]
             }
         ]

@@ -1,23 +1,21 @@
 <script lang="ts" context="module">
 
     import {type BooleanStoreType, createBooleanStore} from "../../core/stores/BooleanStoreObject";
+    import {BaseConfig} from "../../core/tools/BaseConfig";
 
-    export type SwitchConfig = {
+    export class SwitchConfig extends BaseConfig {
         checked: BooleanStoreType;
         disabled: BooleanStoreType;
-        componentName: "switch";
         labelOff?: string;
         labelOn?: string;
-    };
 
-    export function createSwitchConfig(labelOff?:string, labelOn?:string ): SwitchConfig {
-        return {
-            checked: createBooleanStore(),
-            disabled: createBooleanStore(),
-            componentName: "switch",
-            labelOff: (labelOff !== undefined) ? labelOff : "",
-            labelOn: (labelOn !== undefined) ? labelOn : "",
-        };
+        constructor(labelOff?:string, labelOn?:string ) {
+            super("switch");
+            this.checked = createBooleanStore();
+            this.disabled = createBooleanStore();
+            this.labelOff = (labelOff !== undefined) ? labelOff : "";
+            this.labelOn = (labelOn !== undefined) ? labelOn : "";
+        }
     }
 </script>
 
@@ -25,7 +23,7 @@
     import InputLabel from "./utils/InputLabel.svelte";
     import InputBlocker from "./utils/InputBlocker.svelte";
 
-    export let config: SwitchConfig = createSwitchConfig();
+    export let config: SwitchConfig = new SwitchConfig();
 
     let checked: boolean = false;
     let disabled: boolean = false;

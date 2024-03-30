@@ -1,9 +1,10 @@
 <script lang="ts" context="module">
 
     import type {IconName} from "../generals/Icon.svelte";
+    import {BaseConfig} from "../../core/tools/BaseConfig";
 
     // TODO refactor to class structure
-    export type DropdownItem = {
+    /*export type DropdownItem = {
         label: string;
         value: string;
         icon: IconName | null;
@@ -29,6 +30,27 @@
             items: items,
             componentName: "dropdown"
         };
+    }*/
+
+    export class DropdownConfig extends BaseConfig {
+        activeItem: DropdownItem;
+        items: DropdownItem[];
+        constructor(items: DropdownItem[], defaultItem?: DropdownItem) {
+            super("dropdown");
+            this.activeItem = defaultItem === undefined ? items[0] : defaultItem;
+            this.items = items;
+        }
+    }
+
+    export class DropdownItem {
+        label: string;
+        value: string;
+        icon: IconName | null;
+        constructor(label:string , value: string, icon?: IconName) {
+            this.label = label;
+            this.value = value;
+            this.icon = icon === undefined ? null : icon;
+        }
     }
 
 </script>
@@ -41,7 +63,7 @@
 
     const itemIconSize = 1; // is in rem
 
-    export let config = createDropdownConfig([]);
+    export let config = new DropdownConfig([]);
 
     function toggleDropdown() {
         showDropdown = !showDropdown;
