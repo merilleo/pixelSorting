@@ -131,6 +131,7 @@ module.exports = {
         'allowTemplateLiterals': true
       }
     ],
+    'no-mixed-operators': 'off',
     // Enforces the usage of trailing commas.
     'comma-dangle': [
       'error',
