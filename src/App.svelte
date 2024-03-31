@@ -7,24 +7,32 @@
     import ToolPanelBuilder from "./components/tool-panels/ToolPanelBuilder.svelte";
     import ImagePreview from "./components/generals/ImagePreview.svelte";
     import {Linear} from "./core/tools/linear/Linear";
+    import ToolCollection from "./core/tools/ToolCollection";
+    import {Test} from "./core/tools/test/Test";
 
-    let linear = new Linear();
+    let tools = new ToolCollection();
+    tools.addTool( new Linear() );
+    tools.addTool( new Test() );
+
+
+    let activeToolName = "";
+    tools.activeToolName.subscribe(value => activeToolName = value);
+
+    tools.setActiveToolByName("test");
+
 </script>
 
 <main class="bg-darkest">
     <ToolboxPanel>
-        <ToolboxGroup>
-            <ToolboxPanelButton> <Icon icon="filter-left" /></ToolboxPanelButton>
-            <ToolboxPanelButton />
-        </ToolboxGroup>
-        <ToolboxGroup>
-            <ToolboxPanelButton />
-            <ToolboxPanelButton />
-        </ToolboxGroup>
+        {#each tools.tools as panel }
+            <ToolboxPanelButton active="{panel.active}" onClick="{() => tools.setActiveToolByName(panel.name)}" >
+                <Icon icon="filter-left" />
+            </ToolboxPanelButton>
+        {/each}
     </ToolboxPanel>
-
-    <ToolPanelBuilder config="{linear.uiConfig}" />
-
+    {#if activeToolName !== ""}
+        <ToolPanelBuilder config="{tools.getToolByName(activeToolName).uiConfig}" />
+    {/if}
     <div class="content">
         <ImagePreview imageUrl=""/>
 

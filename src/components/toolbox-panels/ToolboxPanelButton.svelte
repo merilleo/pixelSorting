@@ -1,9 +1,16 @@
 <script lang="ts">
-    export let active:boolean = false;
-    export let onClick = ()=>{active = !active;};
+    import {type BooleanStoreType, createBooleanStore} from "../../core/stores/BooleanStoreObject";
+
+    export let active: BooleanStoreType;
+
+    let disabled: boolean;
+    active.subscribe(value => disabled = !value);
+    export let onClick = ()=>{
+        active.toggle();
+    };
 </script>
 
-<div class="toolbar-tool {active? "active" : ""}" on:click={onClick}>
+<div class="toolbar-tool {!disabled? "active" : ""}" on:click={onClick}>
     <slot></slot>
 </div>
 

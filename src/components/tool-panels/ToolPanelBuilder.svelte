@@ -9,9 +9,8 @@
     import FormGroup from "../form-elements/FormGroup.svelte";
     import Slider from "../form-elements/Slider.svelte";
     import Switch from "../form-elements/Switch.svelte";
-    import UIConfig from "../../core/tools/linear/UIConfig";
     import Dropdown from "../form-elements/Dropdown.svelte";
-    export const config = UIConfig;
+    export let config;
 
 
 </script>
